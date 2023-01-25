@@ -10,7 +10,7 @@
                 </ion-avatar>
                 <ion-label>
                   <ion-text color="light">
-                    <h2><strong>Company Logo</strong></h2>
+                    <h2><strong>Company</strong></h2>
                     <small>Welcome, {{userName}}</small>
                   </ion-text>
                 </ion-label>
@@ -23,14 +23,14 @@
                           Sign In
                         </ion-button>
                         <ion-button *ngIf="isLoggedIn"  color="secondary" expand="block">
-                          <ion-icon size="small" slot="start" name="contact"></ion-icon>
+                          <ion-icon  slot="start" name="log-in"></ion-icon>
                           Account
                         </ion-button>
                     </ion-menu-toggle>
                 </ion-col>
                 <ion-col size="6">
                     <ion-menu-toggle auto-hide="false">
-                        <ion-button align-self color="secondary" expand="block">
+                        <ion-button align-self color="secondary" expand="block" [routerDirection]="'root'" [routerLink]="list">
                             <ion-icon size="small" slot="start" name="cart"></ion-icon>
                             Orders
                         </ion-button>

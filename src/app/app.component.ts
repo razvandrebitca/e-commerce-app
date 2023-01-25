@@ -15,14 +15,19 @@ export class AppComponent {
       icon: 'home',
     },
     {
-      title: 'List',
+      title: 'Cart',
       url: '/list',
+      icon: 'list',
+    },
+    {
+      title: 'Create product',
+      url: '/create-product',
       icon: 'list',
     },
   ];
 
   userName;
-  isLoggedIn: any = false;
+  isLoggedIn: any = true;
 
   constructor(
     private platform: Platform,

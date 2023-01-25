@@ -72,12 +72,12 @@
     <!-- END - Item Divider -->
     <!-- START - Sliding Content -->
     <ion-slides [options]="sliderConfig">
-      <ion-slide>
-        <ion-card>
+      <ion-slide *ngFor="let product of products; let i=index">
+        <ion-card (click)="selectProduct(i)" routerLink="/product-details">
           <img src="https://via.placeholder.com/300">
           <ion-card-header>
-              <ion-card-title>Prototype</ion-card-title>
-              <ion-card-subtitle>100 RON</ion-card-subtitle>
+              <ion-card-title>{{product.name}}</ion-card-title>
+              <ion-card-subtitle>{{product.totalPrice}}</ion-card-subtitle>
           </ion-card-header>
           <ion-card-content>
               <ion-button expand="block" size="small" (click)="addCart()">
@@ -86,34 +86,6 @@
           </ion-card-content>
       </ion-card>
       </ion-slide>
-      <ion-slide>
-          <ion-card>
-            <img src="https://via.placeholder.com/300">
-            <ion-card-header>
-                <ion-card-title>Prototype</ion-card-title>
-                <ion-card-subtitle>100 RON</ion-card-subtitle>
-            </ion-card-header>
-            <ion-card-content>
-                <ion-button expand="block" size="small" (click)="addCart()">
-                    Add Cart
-                  </ion-button>
-            </ion-card-content>
-        </ion-card>
-      </ion-slide>
-      <ion-slide>
-          <ion-card>
-            <img src="https://via.placeholder.com/300">
-            <ion-card-header>
-                <ion-card-title>Prototype</ion-card-title>
-                <ion-card-subtitle>100 RON</ion-card-subtitle>
-            </ion-card-header>
-            <ion-card-content>
-                <ion-button expand="block" size="small" (click)="addCart()">
-                    Add Cart
-                  </ion-button>
-            </ion-card-content>
-        </ion-card>
-        </ion-slide>
     </ion-slides>
     <!-- END - Sliding Content -->
 </ion-content>
