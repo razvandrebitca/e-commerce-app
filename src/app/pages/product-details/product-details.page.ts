@@ -1,13 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { AnimationController } from '@ionic/angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { AnimationController, IonContent, IonSlides, MenuController, NavController } from '@ionic/angular';
+import { DataService, HomeTab, Product } from 'src/app/services/data.service';
+import { FunctionsService } from 'src/app/services/functions.service';
 import { ProductService } from 'src/app/services/product.service';
-interface Product{
-  name:string
-  totalPrice:number
-  href:string
-  rating:number
-  description:string
-}
+
 
 @Component({
   selector: 'app-product-details',
@@ -16,73 +12,75 @@ interface Product{
 })
 export class ProductDetailsPage implements OnInit {
 
-  selectedSize: number;
-  selectedColor: number;
-  activeVariation: string;
-  products:Product[]=[];
-  index: any;
+  @ViewChild('Slides') slides: IonSlides;
+  @ViewChild('Content') content: IonContent;
+  @ViewChild('slider') slider: IonSlides;
+
+  index = 0;
+  segment = '';
+  slideOpts = {
+    effect: 'flip',
+    zoom: false
+  };
+
+  data: Array<HomeTab> = [];
+
+  product: Product;
 
   constructor(
-    private animatioCntrl: AnimationController,
-    private productService: ProductService
-  ) {
- 
+    private menuCtrl: MenuController,
+    private fun: FunctionsService,
+    private dataService: DataService,
+    private nav: NavController) {
+
+    this.product = dataService.current_product;
+    this.data = dataService.item_tab;
+    this.segment = this.data[0].title;
   }
 
   ngOnInit() {
-    this.activeVariation = 'size';
-    // this.productService.getProducts().subscribe((res: any) => {
-    //   this.products = res.data;
-    // })
-    this.products=this.productService.data;
-   this.index = this.productService.selectedProduct;
   }
 
-  segmentChanged(e: any) {
-    this.activeVariation = e.detail.value;
+  ionViewDidEnter() {
+    this.menuCtrl.enable(false, 'start');
+    this.menuCtrl.enable(false, 'end');
+  }
 
-    if (this.activeVariation == 'color') {
-      this.animatioCntrl.create()
-        .addElement(document.querySelector('.sizes'))
-        .duration(500)
-        .iterations(1)
-        .fromTo('transform', 'translateX(0px)', 'translateX(100%)')
-        .fromTo('opacity', '1', '0.2')
-        .play();
+  async change() {
+    await this.slides.getActiveIndex().then(d => this.index = d);
+    this.segment = this.data[this.index].title;
+    this.drag();
+  }
 
-      this.animatioCntrl.create()
-        .addElement(document.querySelector('.colors'))
-        .duration(500)
-        .iterations(1)
-        .fromTo('transform', 'translateX(-100%)', 'translateX(0)')
-        .fromTo('opacity', '0.2', '1')
-        .play();
-    } else {
-      this.animatioCntrl.create()
-        .addElement(document.querySelector('.sizes'))
-        .duration(500)
-        .iterations(1)
-        .fromTo('transform', 'translateX(100%)', 'translateX(0)')
-        .fromTo('opacity', '0.2', '1')
-        .play();
+  onReviewClick(index) {
+    this.segment = this.data[index].title;
+    this.index = index;
+    this.slides.slideTo(index);
+    this.content.scrollToTop();
+    this.drag();
 
-      this.animatioCntrl.create()
-        .addElement(document.querySelector('.colors'))
-        .duration(500)
-        .iterations(1)
-        .fromTo('transform', 'translateX(0px)', 'translateX(-100%)')
-        .fromTo('opacity', '1', '0.2')
-        .play();
+  }
+
+  goToCart() {
+    this.fun.navigate('cart', false);
+  }
+
+  update(i) {
+    this.slides.slideTo(i);
+  }
+
+  drag() {
+    let distanceToScroll = 0;
+    for (const index in this.data) {
+      if (parseInt(index) < this.index) {
+        distanceToScroll = distanceToScroll + document.getElementById('seg_' + index).offsetWidth + 24;
+      }
     }
+    document.getElementById('dag').scrollLeft = distanceToScroll;
   }
 
-  changeSize(size: number) {
-    this.selectedSize = size;
+  seg(event) {
+    this.segment = event.detail.value;
   }
-
-  changeColor(color: number) {
-    this.selectedColor = color;
-  }
-
 
 }
