@@ -42,7 +42,7 @@ export class FunctionsService {
     if (this.dataService.current_user.address.length === 0) {
       this.nav.navigateForward('/NewAddress/$1');
     } else {
-      this.nav.navigateForward('/Checkout');
+      this.nav.navigateForward('/checkout');
     }
   }
 

@@ -17,18 +17,19 @@ export class AppComponent {
     {
       title: 'Cart',
       url: '/list',
-      icon: 'list',
+      icon: 'cart',
     },
     {
       title: 'Create product',
       url: '/create-product',
-      icon: 'list',
+      icon: 'create',
     },
   ];
 
   userName;
   isLoggedIn: any = true;
-
+  side_open = true;
+  side_open1 = true;
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -36,7 +37,20 @@ export class AppComponent {
   ) {
     this.getUserDetails();
   }
+  menu(b){
+    if(b){
+      this.side_open = false;
+      this.side_open1 = true;
+    }
+    else {
+      this.side_open = false;
+      this.side_open1 = false;
+    }
+  }
 
+  back(){
+    this.side_open = true;
+  }
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();

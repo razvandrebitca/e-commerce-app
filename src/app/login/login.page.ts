@@ -24,17 +24,17 @@ export class LoginPage implements OnInit {
     });}
     login(): void {
     
-      this.authService.login(this.controls.email.value, this.controls.password.value)
-        .subscribe((res: any) => {
-          // Store the access token in the localstorage
-          localStorage.setItem('access_token', res.token);
+      // this.authService.login(this.controls.email.value, this.controls.password.value)
+      //   .subscribe((res: any) => {
+      //     // Store the access token in the localstorage
+      //     localStorage.setItem('access_token', res.token);
           // Navigate to home page
           this.router.navigate(['/']);
-        }, (err: any) => {
-          // This error can be internal or invalid credentials
-          // You need to customize this based on the error.status code
+        // }, (err: any) => {
+        //   // This error can be internal or invalid credentials
+        //   // You need to customize this based on the error.status code
 
-        });
+        // });
     }
   ngOnInit() {
   }

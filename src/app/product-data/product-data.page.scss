@@ -1,21 +1,25 @@
 .image {
     // height: 270px;
 }
-.product-image-overlay{
+
+.product-image-overlay {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: linear-gradient(transparent 75%,white 100%);
+    background: linear-gradient(transparent 75%, white 100%);
 }
-.hover-buttons{
+
+.hover-buttons {
     position: absolute;
     bottom: -10px;
     z-index: 10;
     right: 15px;
 }
-.red{
+
+.red {
     color: red;
 }
+
 .price {
     font-size: 15px;
     float: left;
@@ -23,11 +27,13 @@
     text-align: center !important;
     margin: 3px;
 }
+
 .inline {
     font-size: 12px;
     margin-inline-end: 5px;
     text-decoration: line-through;
 }
+
 .badge {
     background-color: rgba(0, 0, 0, 0.3);
     padding: 8px 5px;
@@ -40,32 +46,39 @@
     z-index: 9;
     font-size: 16px;
 }
+
 .cmnt {
     font-size: 12px;
 }
+
 .rev-img {
     width: 50px;
 }
+
 .row {
     margin: 5px;
 }
+
 .spon-img {
     min-height: 100px;
     max-height: 100px;
     margin: 3px;
 }
-.container-outer { 
-    overflow: scroll; 
+
+.container-outer {
+    overflow: scroll;
     display: flex;
     flex-wrap: nowrap;
 }
-.container-inner { 
-    min-width: 120px; 
+
+.container-inner {
+    min-width: 120px;
     max-width: 120px;
     display: inline;
     padding: 3px 9px;
     align-content: center !important;
 }
+
 .progress-outer {
     width: 96%;
     text-align: center;
@@ -74,6 +87,7 @@
     color: #fff;
     border-radius: 20px;
 }
+
 .progress-inner {
     white-space: nowrap;
     overflow: hidden;
@@ -81,20 +95,25 @@
     border-radius: 20px;
     background-color: var(--ion-color-mytheme);
 }
+
 .info {
     padding-top: 5px;
     padding-bottom: 5px;
 }
+
 .name {
     font-size: 18px;
 }
+
 .small-ico {
     font-size: 12px;
 }
+
 .avatar {
     width: 33px;
     height: 33px;
 }
+
 .sep {
     height: 1px;
     background-color: rgb(210, 210, 210);
@@ -102,6 +121,7 @@
     margin: 6px 0;
     transform: translateX(-16px);
 }
+
 .fab {
     width: 25px;
     height: 25px;
@@ -111,11 +131,34 @@
     border: .6px solid rgba(0, 0, 0, .3);
     background-color: white !important;
 }
+
 .rate {
     color: var(--ion-color-mytheme) !important;
     font-size: 12px;
+    text-align: left;
 }
+
 .full {
     width: 100%;
     display: block;
 }
+
+.float-left {
+    float: left;
+    margin-left: 1em;
+}
+
+.float-right {
+    float: right;
+    margin-right: 1em;
+}
+.no-margin{
+    --margin-start: 0;
+    --margin-end: 0;
+    --margin-top: 0;
+    --margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+ }

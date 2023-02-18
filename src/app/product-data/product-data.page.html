@@ -1,6 +1,6 @@
  <div>
-  <ion-row padding-0>
-    <ion-col padding-0 class="padding-0">
+  <ion-row >
+    <ion-col class="padding-0">
       <ion-slides pager="true" [options]="slideOpts">
         <ion-slide *ngFor="let i of product.image;">
           <img class="image" src="https://picsum.photos/500/500">
@@ -21,47 +21,10 @@
     <ion-row>
       <ion-icon name="star" color="primary" *ngFor="let i of fun.array(product.rating)"></ion-icon>
       <ion-icon name="star-outline" color="primary" *ngFor="let i of fun.array(5-product.rating)"></ion-icon>
-      <h6 no-margin padding-start class="rate" (click)="goToReviews()">({{product.store_rating}} store ratings)</h6>
-    </ion-row>
     
-   
-    <div class="sep"></div>
-    <ion-row class="full info">
-      <ion-row>
-        <ion-col><strong>Sizing</strong></ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <h6 no-margin>Too Small</h6>
-        </ion-col>
-        <ion-col size="8">
-          <div class="progress-outer">
-            <div class="progress-inner" [ngStyle]="{'width': product.sizing.small+'%'}"></div>
-          </div>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <h6 no-margin>Just Right</h6>
-        </ion-col>
-        <ion-col size="8">
-          <div class="progress-outer">
-            <div class="progress-inner" [ngStyle]="{'width': product.sizing.okay+'%'}"></div>
-          </div>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <h6 no-margin>Too Large</h6>
-        </ion-col>
-        <ion-col size="8">
-          <div class="progress-outer">
-            <div class="progress-inner" [ngStyle]="{'width': product.sizing.large+'%'}"></div>
-          </div>
-        </ion-col>
-      </ion-row>
     </ion-row>
-    <div class="sep"></div>
+    <h6 class="rate no-margin" (click)="goToReviews()">({{product.store_rating}} store ratings)</h6>
+    <!-- <div class="sep"></div>
     <div>
       <ion-text><span float-left no-margin><strong>Sold By</strong></span></ion-text><br>
       <ion-row>
@@ -75,85 +38,85 @@
           </ion-text><br>
         </ion-col>
       </ion-row>
-    </div>
+    </div> -->
     <div class="sep"></div>
     <ion-list lines="none">
       <ion-row class="full info" (click)="toogle(0)">
         <ion-col size="9">
-          <strong float-left>Item Specification</strong>
+          <strong class="float-left">Item Specification</strong>
         </ion-col>
         <ion-col>
-          <ion-icon float-right name="arrow-dropdown" *ngIf="!open[0]"></ion-icon>
-          <ion-icon float-right name="arrow-dropup" *ngIf="open[0]"></ion-icon>
+          <ion-icon class="float-right" name="caret-down-outline" *ngIf="!open[0]"></ion-icon>
+          <ion-icon class="float-right" name="caret-up-outline" *ngIf="open[0]"></ion-icon>
         </ion-col>
       </ion-row>
-      <ion-row class="full" margin-top *ngIf="open[0]">
+      <ion-row class="full" *ngIf="open[0]">
         <ion-col>
-          <span float-left>{{product.specs}}</span>
+          <span class="float-left">{{product.specs}}</span>
         </ion-col>
       </ion-row>
       <div class="sep"></div>
       <ion-row class="full info" (click)="toogle(1)">
         <ion-col size="9">
-          <strong float-left>Description</strong>
+          <strong class="float-left">Description</strong>
         </ion-col>
         <ion-col>
-          <ion-icon float-right name="arrow-dropdown" *ngIf="!open[1]"></ion-icon>
-          <ion-icon float-right name="arrow-dropup" *ngIf="open[1]"></ion-icon>
+          <ion-icon class="float-right" name="caret-down-outline" *ngIf="!open[1]"></ion-icon>
+          <ion-icon class="float-right" name="caret-up-outline" *ngIf="open[1]"></ion-icon>
         </ion-col>
       </ion-row>
-      <ion-row class="full" margin-top *ngIf="open[1]">
+      <ion-row class="full"  *ngIf="open[1]">
         <ion-col>
-          <span float-left>{{product.description}}</span>
+          <span class="float-left">{{product.description}}</span>
         </ion-col>
       </ion-row>
       <div class="sep"></div>
       <ion-row class="full info" (click)="toogle(2)">
         <ion-col size="9">
-          <strong float-left>Buyer Guarantee</strong>
+          <strong class="float-left">Buyer Guarantee</strong>
         </ion-col>
         <ion-col>
-          <ion-icon float-right name="arrow-dropdown" *ngIf="!open[2]"></ion-icon>
-          <ion-icon float-right name="arrow-dropup" *ngIf="open[2]"></ion-icon>
+          <ion-icon class="float-right" name="caret-down-outline" *ngIf="!open[2]"></ion-icon>
+          <ion-icon class="float-right" name="caret-up-outline" *ngIf="open[2]"></ion-icon>
         </ion-col>
       </ion-row>
-      <ion-row margin-top *ngIf="open[2]">
+      <ion-row *ngIf="open[2]">
         <ion-col>
-          <span float-left>{{product.buyer_guarantee}}</span>
+          <span class="float-left">{{product.buyer_guarantee}}</span>
         </ion-col>
       </ion-row>
       <div class="sep"></div>
       <ion-row class="full info" (click)="toogle(3)">
         <ion-col size="9">
-          <strong float-left>Shipping Information</strong>
+          <strong class="float-left">Shipping Information</strong>
         </ion-col>
         <ion-col>
-          <ion-icon float-right name="arrow-dropdown" *ngIf="!open[3]"></ion-icon>
-          <ion-icon float-right name="arrow-dropup" *ngIf="open[3]"></ion-icon>
+          <ion-icon class="float-right" name="caret-down-outline" *ngIf="!open[3]"></ion-icon>
+          <ion-icon class="float-right" name="caret-up-outline" *ngIf="open[3]"></ion-icon>
         </ion-col>
       </ion-row>
-      <ion-row class="full" margin-top *ngIf="open[3]">
+      <ion-row class="full" *ngIf="open[3]">
         <ion-col>
-          <span float-left><strong>Standard Shipping</strong> {{product.currency}}{{product.shipping}}</span>
+          <span class="float-left">Standard Shipping {{product.currency}}{{product.shipping}}</span>
         </ion-col>
       </ion-row>
       <!-- <div class="sep"></div> -->
       <div (touchstart)="remove()" (touchend)="gainback()" *ngFor="let spon of product.sponsored">
         <ion-text>
-          <h5 no-margin ><strong>Sponsored</strong></h5>
+          <h5 class="no-margin" ><strong>Sponsored</strong></h5>
         </ion-text>
         <ion-row>
           <ion-row class="container-outer">
             <div  (click)="open_item(data)" class="container-inner">
               <img src="https://picsum.photos/500/500" class="spon-img">
               <ion-row>
-                <ion-col *ngIf="spon.offer" no-padding>
+                <ion-col *ngIf="spon.offer" >
                   <ion-text>
                     <h4 class="price"><span class="inline">{{spon.currency}}{{spon.cost_price}}</span> <strong>{{spon.currency}}{{fun.calculate(spon.cost_price,
                         spon.discount)}}</strong></h4>
                   </ion-text>
                 </ion-col>
-                <ion-col *ngIf="!spon.offer" no-padding>
+                <ion-col *ngIf="!spon.offer">
                   <ion-text>
                     <h4 class="price"><strong>{{spon.currency}}{{spon.cost_price}}</strong></h4>
                   </ion-text>
@@ -163,7 +126,7 @@
           </ion-row>
         </ion-row>
       </div>
-
+<!-- 
       <div class="sep"></div>
       <ion-row class="full info">
         <ion-row>
@@ -187,7 +150,7 @@
             </ion-col>
           </ion-row>
         </div>
-      </ion-row>
+      </ion-row> -->
 
     </ion-list>
   </div>

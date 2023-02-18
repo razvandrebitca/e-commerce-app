@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'home',
     pathMatch: 'full',
   },
   {
@@ -12,7 +12,7 @@ const routes: Routes = [
     loadChildren:()=> import( './pages/home/home.module').then(m=> m.HomeComponentModule),
   },
   {
-    path: 'list',
+    path: 'cart',
     loadChildren: ()=>import('./pages/list/list.module').then(m=>m.ListComponentModule),
   },
   {
@@ -50,6 +50,10 @@ const routes: Routes = [
   {
     path: 'product-data',
     loadChildren: () => import('./product-data/product-data.module').then( m => m.ProductDataPageModule)
+  },
+  {
+    path: 'checkout',
+    loadChildren: () => import('./pages/checkout/checkout.module').then( m => m.CheckoutPageModule)
   },
 
 ];
