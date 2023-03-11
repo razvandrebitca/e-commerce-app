@@ -18,7 +18,7 @@ export class ProductDataPage implements OnInit {
   slideOpts = {
     effect: 'flip'
   };
-  open = [false, false, false, false];
+  open = [false, false, false];
   liked = false;
   constructor(public alertController: AlertController,
   

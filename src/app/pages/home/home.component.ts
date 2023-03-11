@@ -52,21 +52,22 @@
 //   }
 // }
 
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MenuController, IonSlides } from '@ionic/angular';
 import { FunctionsService } from '../../services/functions.service';
 import { DataService, HomeTab, Product } from '../../services/data.service';
 import { ActivatedRoute } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.component.html',
   styleUrls: ['home.component.scss'],
 })
-export class HomeComponent {
-
+export class HomeComponent implements OnInit {
+  public products;
   @ViewChild('Slides') slides: IonSlides;
-
+  term='';
   segment = '';
   index = 0;
   data: Array<HomeTab> = [];
@@ -85,7 +86,9 @@ export class HomeComponent {
     private activatedRoute: ActivatedRoute,
     private menuCtrl: MenuController,
     private fun: FunctionsService,
-    private dataService: DataService) {
+    private dataService: DataService,
+    private http: HttpClient
+  ) {
     this.data = dataService.tabs;
     this.sponsored = dataService.sponsored;
     this.product_data_1 = dataService.products_1;
@@ -99,6 +102,11 @@ export class HomeComponent {
     } else {
       this.segment = this.data[0].title;
     }
+  }
+  ngOnInit(): void {
+    this.http.get('http://localhost:8000/api/products/').subscribe((res: any) => {
+      this.products = res.data;
+    });
   }
 
   ionViewDidEnter() {

@@ -1,34 +1,121 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
+      <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-        Create
+      My Products
     </ion-title>
-  
-</ion-toolbar>
+
+  </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <h1 class="title">Create Service</h1>
-  
+<ion-content color="light">
+  <h1 class="title">Create Product</h1>
+
   <div class="profile-info">
-      <form [formGroup]="productGroup">
-    <ion-item>
-      <ion-label position="floating">Title</ion-label>
-      <ion-input  formControlName="title" required></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Description</ion-label>
-      <ion-input formControlName="description" required></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Price</ion-label>
-      <ion-input formControlName="price" required></ion-input>
-    </ion-item>
-    <br>
-    <ion-button type="submit" expand="full">Create service</ion-button>
-  </form>
+    <form [formGroup]="productGroup" (submit)="createProduct()">
+      <ion-item>
+        <ion-label position="floating">Name</ion-label>
+        <ion-input formControlName="name" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Description</ion-label>
+        <ion-input formControlName="description" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Price</ion-label>
+        <ion-input formControlName="price" required></ion-input>
+      </ion-item>
+      <br>
+      <ion-button type="submit" expand="full">Create</ion-button>
+    </form>
   </div>
+  <br>
+  <ion-row *ngIf="edit == false">
+    <ion-col *ngFor="let data of products" size="6">
+      <ion-card class="card no-margin" (click)="editProduct(data)">
+        <ion-badge class="badge" *ngIf="data.discount>0 "> {{data.discount}}%</ion-badge>
+        <img src="https://picsum.photos/200/200" [alt]="data.name">
+        <ion-card-content>
+          <ion-card-title>
+            <ion-row>
+              <ion-col>
+                <ion-text text-left><span class="price"><strong>{{data.name}}</strong></span></ion-text>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col *ngIf="data.discount > 0">
+                <ion-text><span class="price"><span class="inline">$
+                      {{calculateFullPrice(data.totalPrice,data.discount)}}</span></span></ion-text>
+                <ion-text><span class="price"><strong>$ {{data.totalPrice}}</strong></span></ion-text>
+              </ion-col>
+              <ion-col *ngIf="data.discount == 0">
+                <ion-text><span class="price"><strong>$ {{data.totalPrice}}</strong></span></ion-text>
+              </ion-col>
+            </ion-row>
+
+          </ion-card-title>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <div *ngIf="edit==true">
+
+    <ion-row lines="none" class="row">
+      <ion-text class="name"><ion-input :value=" {{product.name}}"></ion-input></ion-text>
+    </ion-row>
+
+    <ion-list lines="none">
+      <div class="sep"></div>
+      <ion-row class="full info" (click)="toogle(1)">
+        <ion-col size="9">
+          <strong class="float-left">Description</strong>
+        </ion-col>
+        <ion-col>
+          <ion-icon class="float-right" name="caret-down-outline" *ngIf="!open[1]"></ion-icon>
+          <ion-icon class="float-right" name="caret-up-outline" *ngIf="open[1]"></ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row class="full" *ngIf="open[1]">
+        <ion-col>
+          <span class="float-left"><ion-input :value="{{product.description}}"></ion-input></span>
+        </ion-col>
+      </ion-row>
+      <div class="sep"></div>
+      <ion-row class="full info" (click)="toogle(2)">
+        <ion-col size="9">
+          <strong class="float-left">Buyer Guarantee</strong>
+        </ion-col>
+        <ion-col>
+          <ion-icon class="float-right" name="caret-down-outline" *ngIf="!open[2]"></ion-icon>
+          <ion-icon class="float-right" name="caret-up-outline" *ngIf="open[2]"></ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="open[2]">
+        <ion-col>
+          <span class="float-left"><ion-input :value="{{product.description}}"></ion-input></span>
+        </ion-col>
+      </ion-row>
+      <div class="sep"></div>
+      <ion-row class="full info" (click)="toogle(3)">
+        <ion-col size="9">
+          <strong class="float-left">Shipping Information</strong>
+        </ion-col>
+        <ion-col>
+          <ion-icon class="float-right" name="caret-down-outline" *ngIf="!open[3]"></ion-icon>
+          <ion-icon class="float-right" name="caret-up-outline" *ngIf="open[3]"></ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row class="full" *ngIf="open[3]">
+        <ion-col>
+          <span class="float-left"><ion-input :value="Standard Shipping {{product.totalPrice}}"></ion-input> </span>
+        </ion-col>
+      </ion-row>
+    </ion-list>
+    <br>
+    <ion-button (click)="this.edit=false" expand="full">Save</ion-button>
+  </div>
+
 </ion-content>

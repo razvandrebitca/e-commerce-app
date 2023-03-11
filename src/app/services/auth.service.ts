@@ -10,6 +10,7 @@ export class AuthService {
   // Variables
   authUrl = 'http://localhost:8000/api/login';
   apiUrl = 'http://localhost:8000/api';
+  registerUrl = 'http://localhost:8000/api/register';
   options: any;
   /**
    * Constructor
@@ -36,6 +37,15 @@ export class AuthService {
       password: p,
     }, this.options);
   }
+  register(name: String, email: String, password: String, c_password:String) {
+		return this.http.post(this.registerUrl, {
+			name: name,
+			email: email,
+			password: password,
+			c_password:c_password
+		});
+	}
+
   /**
    * Revoke the authenticated user token
    */

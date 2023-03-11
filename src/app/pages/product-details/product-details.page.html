@@ -19,15 +19,14 @@
 <ion-footer class="footer align-items-center" *ngIf="segment == 'Overview'">
   <ion-row class="align-items-center">
     <ion-col>
-      <ion-text *ngIf="product.offer">
-        <h6 class="no-margin cut">{{product.currency}}{{product.cost_price}}</h6>
+      <ion-text *ngIf="product.discount > 0">
+        <h6 class="no-margin cut">$ {{calculateFullPrice(product.totalPrice,product.discount)}} </h6>
       </ion-text>
-      <ion-text *ngIf="product.offer">
-        <h3 class="foot-highlight no-margin">{{product.currency}}{{fun.calculate(product.cost_price,
-          product.discount)}}</h3>
+      <ion-text *ngIf="product.discount > 0">
+        <h3 class="foot-highlight no-margin">&nbsp; $ {{product.totalPrice}}</h3>
       </ion-text>
-      <ion-text *ngIf="!product.offer">
-        <h3 class="foot-highlight no-margin">{{product.currency}}{{product.cost_price}}</h3>
+      <ion-text *ngIf="product.discount == 0">
+        <h3 class="foot-highlight no-margin">$ {{product.totalPrice}}</h3>
       </ion-text>
     </ion-col>
     <ion-col size="4">

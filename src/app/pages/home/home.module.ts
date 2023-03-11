@@ -6,7 +6,8 @@ import { RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home.component';
 import { ProductlistPage } from 'src/app/productlist/productlist.page';
-
+import { HttpClientModule } from '@angular/common/http';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 @NgModule({
   imports: [
     CommonModule,
@@ -18,9 +19,11 @@ import { ProductlistPage } from 'src/app/productlist/productlist.page';
         component: HomeComponent,
       },
     ]),
+    HttpClientModule,
+    Ng2SearchPipeModule
   ],
-  declarations: [HomeComponent,ProductlistPage],
+  declarations: [HomeComponent, ProductlistPage],
   entryComponents: [ProductlistPage],
-  schemas:[CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class HomeComponentModule {}
+export class HomeComponentModule { }

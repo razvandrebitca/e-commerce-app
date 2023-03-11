@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Storage } from "@ionic/storage";
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -15,13 +16,8 @@ export class AppComponent {
       icon: 'home',
     },
     {
-      title: 'Cart',
-      url: '/list',
-      icon: 'cart',
-    },
-    {
-      title: 'Create product',
-      url: '/create-product',
+      title: 'My Products',
+      url: '/my-products',
       icon: 'create',
     },
   ];
@@ -33,8 +29,10 @@ export class AppComponent {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private storage:Storage
   ) {
+    this.storage.create();
     this.getUserDetails();
   }
   menu(b){
@@ -46,6 +44,9 @@ export class AppComponent {
       this.side_open = false;
       this.side_open1 = false;
     }
+  }
+  logout(){
+    this.storage.clear();
   }
 
   back(){

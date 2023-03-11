@@ -2,13 +2,13 @@
   <ion-row >
     <ion-col class="padding-0">
       <ion-slides pager="true" [options]="slideOpts">
-        <ion-slide *ngFor="let i of product.image;">
+        <ion-slide *ngFor="let i of [].constructor(3)">
           <img class="image" src="https://picsum.photos/500/500">
           <div class="product-image-overlay"></div>
         </ion-slide>
       </ion-slides>
       <ion-badge class="badge">
-        <ion-icon name="images"></ion-icon>{{product.image.length}}
+        <ion-icon name="images"></ion-icon>3
       </ion-badge>
     
     </ion-col>
@@ -23,38 +23,9 @@
       <ion-icon name="star-outline" color="primary" *ngFor="let i of fun.array(5-product.rating)"></ion-icon>
     
     </ion-row>
-    <h6 class="rate no-margin" (click)="goToReviews()">({{product.store_rating}} store ratings)</h6>
-    <!-- <div class="sep"></div>
-    <div>
-      <ion-text><span float-left no-margin><strong>Sold By</strong></span></ion-text><br>
-      <ion-row>
-        <ion-col size="2">
-          <ion-avatar class="avatar"><img src="https://picsum.photos/500/500"></ion-avatar>
-        </ion-col>
-        <ion-col>
-          <ion-text><span float-left no-margin>{{product.sold_by}}</span></ion-text><br>
-          <ion-text>
-            <h6 float-left no-margin>{{product.store_rating}} ratings</h6>
-          </ion-text><br>
-        </ion-col>
-      </ion-row>
-    </div> -->
-    <div class="sep"></div>
+    <h6 class="rate no-margin" (click)="goToReviews()">({{product.rating}})</h6>
+    
     <ion-list lines="none">
-      <ion-row class="full info" (click)="toogle(0)">
-        <ion-col size="9">
-          <strong class="float-left">Item Specification</strong>
-        </ion-col>
-        <ion-col>
-          <ion-icon class="float-right" name="caret-down-outline" *ngIf="!open[0]"></ion-icon>
-          <ion-icon class="float-right" name="caret-up-outline" *ngIf="open[0]"></ion-icon>
-        </ion-col>
-      </ion-row>
-      <ion-row class="full" *ngIf="open[0]">
-        <ion-col>
-          <span class="float-left">{{product.specs}}</span>
-        </ion-col>
-      </ion-row>
       <div class="sep"></div>
       <ion-row class="full info" (click)="toogle(1)">
         <ion-col size="9">
@@ -82,7 +53,7 @@
       </ion-row>
       <ion-row *ngIf="open[2]">
         <ion-col>
-          <span class="float-left">{{product.buyer_guarantee}}</span>
+          <span class="float-left">{{product.description}}</span>
         </ion-col>
       </ion-row>
       <div class="sep"></div>
@@ -97,7 +68,7 @@
       </ion-row>
       <ion-row class="full" *ngIf="open[3]">
         <ion-col>
-          <span class="float-left">Standard Shipping {{product.currency}}{{product.shipping}}</span>
+          <span class="float-left">Standard Shipping {{product.totalPrice}}</span>
         </ion-col>
       </ion-row>
       <!-- <div class="sep"></div> -->
@@ -110,15 +81,14 @@
             <div  (click)="open_item(data)" class="container-inner">
               <img src="https://picsum.photos/500/500" class="spon-img">
               <ion-row>
-                <ion-col *ngIf="spon.offer" >
+                <ion-col *ngIf="spon.discount > 0" >
                   <ion-text>
-                    <h4 class="price"><span class="inline">{{spon.currency}}{{spon.cost_price}}</span> <strong>{{spon.currency}}{{fun.calculate(spon.cost_price,
-                        spon.discount)}}</strong></h4>
+                    <h4 class="price"><span class="inline">${{product.totalPrice}}</span> <strong>${{product.totalPrice}}</strong></h4>
                   </ion-text>
                 </ion-col>
-                <ion-col *ngIf="!spon.offer">
+                <ion-col *ngIf="!spon.discount == 0">
                   <ion-text>
-                    <h4 class="price"><strong>{{spon.currency}}{{spon.cost_price}}</strong></h4>
+                    <h4 class="price"><strong>${{product.totalPrice}}</strong></h4>
                   </ion-text>
                 </ion-col>
               </ion-row>

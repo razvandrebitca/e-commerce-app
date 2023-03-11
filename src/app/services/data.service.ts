@@ -229,7 +229,7 @@ export class DataService {
 
   recent = this.products_1;
 
-  current_product: Product = this.products_1[0];
+  current_product: any = {};
 
   current_user: User = {
     fname: 'Tanay',
