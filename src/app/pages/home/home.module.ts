@@ -8,6 +8,7 @@ import { HomeComponent } from './home.component';
 import { ProductlistPage } from 'src/app/productlist/productlist.page';
 import { HttpClientModule } from '@angular/common/http';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { NgxPaginationModule } from 'ngx-pagination';
 @NgModule({
   imports: [
     CommonModule,
@@ -20,7 +21,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
       },
     ]),
     HttpClientModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    NgxPaginationModule
   ],
   declarations: [HomeComponent, ProductlistPage],
   entryComponents: [ProductlistPage],

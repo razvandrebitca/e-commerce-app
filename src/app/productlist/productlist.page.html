@@ -1,5 +1,5 @@
  <ion-row>
-  <ion-col *ngFor="let data of recieved_data|filter:term" size="6">
+  <ion-col *ngFor="let data of recieved_data |filter:term | paginate: { itemsPerPage: 10, currentPage: p };" size="6">
     <ion-card class="card no-margin" (click)="open(data)">
       <ion-badge class="badge" *ngIf="data.discount>0">{{data.discount}}%</ion-badge>
       <img src="https://picsum.photos/200/200" [alt]="data.name">
@@ -23,4 +23,5 @@
       </ion-card-content>
     </ion-card>
   </ion-col>
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
 </ion-row>

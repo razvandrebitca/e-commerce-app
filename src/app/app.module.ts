@@ -9,9 +9,10 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from    '@ionic/storage-angular' 
+import { NgxPaginationModule } from 'ngx-pagination';
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,HttpClientModule,IonicStorageModule.forRoot()],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,HttpClientModule,IonicStorageModule.forRoot(),NgxPaginationModule],
   providers: [
     StatusBar,
     SplashScreen,

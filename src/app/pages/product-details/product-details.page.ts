@@ -40,8 +40,11 @@ export class ProductDetailsPage implements OnInit {
 
   ngOnInit() {
   }
-  calculateFullPrice(price:any,discount:any){
-    return (100*price)/(100-discount);
+  calculateFullPrice(price: any, discount: any) {
+    if(discount > 0)
+    return (100 * price) / (100 - discount);
+    else 
+    return price;
   }
 
   ionViewDidEnter() {

@@ -10,7 +10,7 @@ import { FunctionsService } from '../services/functions.service';
   inputs: ['recieved_data','term']
 })
 export class ProductlistPage implements OnInit {
-
+p:any;
   constructor(private fun: FunctionsService, private nav: NavController, private dataService:DataService) { }
 
   ngOnInit() {
@@ -20,7 +20,10 @@ export class ProductlistPage implements OnInit {
     this.fun.update(data);
     this.nav.navigateForward('/product-details');
   }
-  calculateFullPrice(price:any,discount:any){
-    return (100*price)/(100-discount);
+  calculateFullPrice(price: any, discount: any) {
+    if(discount > 0)
+    return (100 * price) / (100 - discount);
+    else 
+    return price;
   }
 }

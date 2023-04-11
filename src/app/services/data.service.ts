@@ -232,15 +232,15 @@ export class DataService {
   current_product: any = {};
 
   current_user: User = {
-    fname: 'Tanay',
+    fname: 'User',
     uid: 'ALSIOCSIIUAISUC',
     did: 'JIOU-ASBB-C871-0345',
     aid: 'ASBB-ASBB-C871-0345',
-    lname: 'Toshniwal',
-    email: 'tanaytoshniwal98@gmail.com',
+    lname: 'User',
+    email: 'user@mail.com',
     billing: [{card_number:'3124',expiry_date:'12/22'},{card_number:'4564',expiry_date:'03/25'}],
-    address: [{ address_line_1: 'ghar', address_line_2: 'ghar', city: 'jaipur', last_name: 'bond', phone_number: 1125532553, zipcode: 12345, country: 'India', first_name: 'James', state: 'Rajasthan' },
-    { address_line_1: 'office', address_line_2: 'Office', city: 'Delhi', last_name: 'Holmes', phone_number: 1125532553, zipcode: 12345, country: 'India', first_name: 'Sherlock', state: 'Delhi' }]
+    address: [{ address_line_1: 'liberty square', address_line_2: 'victory square', city: 'timisoara', last_name: 'usrr', phone_number: 1125532553, zipcode: 12345, country: 'Romania', first_name: 'User', state: 'Timis' },
+    { address_line_1: 'office', address_line_2: 'Office', city: 'Bucharest', last_name: 'User 3', phone_number: 1125532553, zipcode: 12345, country: 'Romania', first_name: 'User 1', state: 'Bucharest' }]
   };
 
   wish_cash = {

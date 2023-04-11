@@ -21,11 +21,19 @@
       </ion-item>
       <ion-item>
         <ion-label position="floating">Description</ion-label>
-        <ion-input formControlName="description" required></ion-input>
+        <ion-input formControlName="detail" required></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Price</ion-label>
         <ion-input formControlName="price" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Stock</ion-label>
+        <ion-input formControlName="stock" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Discount</ion-label>
+        <ion-input formControlName="discount" required></ion-input>
       </ion-item>
       <br>
       <ion-button type="submit" expand="full">Create</ion-button>
@@ -33,7 +41,7 @@
   </div>
   <br>
   <ion-row *ngIf="edit == false">
-    <ion-col *ngFor="let data of products" size="6">
+    <ion-col *ngFor="let data of products | paginate: { itemsPerPage: 10, currentPage: p }" size="6">
       <ion-card class="card no-margin" (click)="editProduct(data)">
         <ion-badge class="badge" *ngIf="data.discount>0 "> {{data.discount}}%</ion-badge>
         <img src="https://picsum.photos/200/200" [alt]="data.name">
@@ -59,63 +67,58 @@
         </ion-card-content>
       </ion-card>
     </ion-col>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
   </ion-row>
 
   <div *ngIf="edit==true">
-
-    <ion-row lines="none" class="row">
-      <ion-text class="name"><ion-input :value=" {{product.name}}"></ion-input></ion-text>
-    </ion-row>
-
-    <ion-list lines="none">
-      <div class="sep"></div>
-      <ion-row class="full info" (click)="toogle(1)">
-        <ion-col size="9">
-          <strong class="float-left">Description</strong>
-        </ion-col>
-        <ion-col>
-          <ion-icon class="float-right" name="caret-down-outline" *ngIf="!open[1]"></ion-icon>
-          <ion-icon class="float-right" name="caret-up-outline" *ngIf="open[1]"></ion-icon>
-        </ion-col>
-      </ion-row>
-      <ion-row class="full" *ngIf="open[1]">
-        <ion-col>
-          <span class="float-left"><ion-input :value="{{product.description}}"></ion-input></span>
-        </ion-col>
-      </ion-row>
-      <div class="sep"></div>
-      <ion-row class="full info" (click)="toogle(2)">
-        <ion-col size="9">
-          <strong class="float-left">Buyer Guarantee</strong>
-        </ion-col>
-        <ion-col>
-          <ion-icon class="float-right" name="caret-down-outline" *ngIf="!open[2]"></ion-icon>
-          <ion-icon class="float-right" name="caret-up-outline" *ngIf="open[2]"></ion-icon>
-        </ion-col>
-      </ion-row>
-      <ion-row *ngIf="open[2]">
-        <ion-col>
-          <span class="float-left"><ion-input :value="{{product.description}}"></ion-input></span>
-        </ion-col>
-      </ion-row>
-      <div class="sep"></div>
-      <ion-row class="full info" (click)="toogle(3)">
-        <ion-col size="9">
-          <strong class="float-left">Shipping Information</strong>
-        </ion-col>
-        <ion-col>
-          <ion-icon class="float-right" name="caret-down-outline" *ngIf="!open[3]"></ion-icon>
-          <ion-icon class="float-right" name="caret-up-outline" *ngIf="open[3]"></ion-icon>
-        </ion-col>
-      </ion-row>
-      <ion-row class="full" *ngIf="open[3]">
-        <ion-col>
-          <span class="float-left"><ion-input :value="Standard Shipping {{product.totalPrice}}"></ion-input> </span>
-        </ion-col>
-      </ion-row>
-    </ion-list>
+    <ion-button  color="primary" (click)="edit=false" ><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
+    <br><br><br>
+    <ion-button color="danger" (click)="deleteProduct(product.id)" expand="full" >Delete</ion-button>
     <br>
-    <ion-button (click)="this.edit=false" expand="full">Save</ion-button>
+    <form  [formGroup]="updateGroup" (submit)="updateProduct(product.id)">
+      <p>Current name : {{product.name}} </p>
+      <br>
+      <ion-item fill="outline" class="row">
+
+        <ion-label position="floating">New name</ion-label>
+        <ion-input formControlName="name" value=""></ion-input>
+      </ion-item>
+      <br>
+      <p>Current description: {{product.description}} </p>
+      <ion-item lines class="row" fill="outline">
+
+        <ion-label position="floating">New description</ion-label>
+        <ion-input formControlName="detail" value=""></ion-input>
+      </ion-item>
+      <br>
+      <p>Current price: {{product.totalPrice}} </p>
+      <br>
+      <ion-item lines class="row" fill="outline">
+
+        <ion-label position="floating">New price</ion-label>
+        <ion-input formControlName="price" value=""></ion-input>
+      </ion-item>
+      <br>
+     
+        <p>Current stock: {{product.stock}} </p>
+      <br>
+      <ion-item lines class="row" fill="outline">
+
+        <ion-label position="floating">New stock</ion-label>
+        <ion-input formControlName="stock" value=""></ion-input>
+      </ion-item>
+      <br>
+        <p>Current discount: {{product.discount}} </p>
+      <br>
+      <ion-item lines class="row" fill="outline">
+
+        <ion-label position="floating">New discount</ion-label>
+        <ion-input formControlName="discount"  value=""></ion-input>
+      </ion-item>
+      <br>
+      <ion-button type="submit" expand="full">Save</ion-button>
+    </form>
+
   </div>
 
 </ion-content>

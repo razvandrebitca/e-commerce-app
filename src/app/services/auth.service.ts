@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -8,9 +8,9 @@ import { Injectable } from '@angular/core';
 export class AuthService {
 
   // Variables
-  authUrl = 'http://localhost:8000/api/login';
-  apiUrl = 'http://localhost:8000/api';
-  registerUrl = 'http://localhost:8000/api/register';
+  authUrl = environment.API_URL+'api/login';
+  apiUrl = environment.API_URL+'api';
+  registerUrl = environment.API_URL+'api/register';
   options: any;
   /**
    * Constructor

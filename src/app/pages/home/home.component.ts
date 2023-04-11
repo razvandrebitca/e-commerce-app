@@ -1,64 +1,10 @@
-// import { Component, OnInit } from '@angular/core';
-// import { ProductService } from 'src/app/services/product.service';
-// import { CartService } from './../../services/cart.service';
-// interface Product {
-//   name: string
-//   totalPrice: number
-//   href: string
-//   rating: number
-// }
-// @Component({
-//   selector: 'app-home',
-//   templateUrl: './home.component.html',
-//   styleUrls: ['./home.component.scss'],
-// })
-// export class HomeComponent implements OnInit {
-//   cartItems = 0;
-//   slideOpts = {
-//     autoplay: {
-//       delay: 2000,
-//     },
-//     zoom: false,
-//     effect: 'flip',
-//   };
-//   sliderConfig = {
-//     zoom: false,
-//     slidesPerView: 1.8,
-//     spaceBetween: 10,
-//     centeredSlides: false,
-//   };
-//   products: Product[] = [];
-//   constructor(public cart: CartService, private productService: ProductService) {
-//     this.cart.getCartTotal().subscribe((val) => {
-//       this.cartItems = val;
-//     });
-//   }
-
-//   addCart() {
-//     const itemCount = this.cartItems + 1;
-//     this.cart.setCartTotal(itemCount);
-//   }
-//   selectProduct(id){
-//     this.productService.selectedProduct = id;
-//   }
-//   ngOnInit() {
-//     this.productService.getProducts().subscribe((res: any) => {
-//       this.products = res.data;
-//       this.productService.data = res.data;
-
-//     })
-
-
-//   }
-// }
-
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MenuController, IonSlides } from '@ionic/angular';
 import { FunctionsService } from '../../services/functions.service';
 import { DataService, HomeTab, Product } from '../../services/data.service';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-
+import { environment } from '../../../environments/environment';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.component.html',
@@ -104,7 +50,7 @@ export class HomeComponent implements OnInit {
     }
   }
   ngOnInit(): void {
-    this.http.get('http://localhost:8000/api/products/').subscribe((res: any) => {
+    this.http.get(environment.API_URL+'api/products/').subscribe((res: any) => {
       this.products = res.data;
     });
   }

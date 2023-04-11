@@ -8,10 +8,12 @@ import { CreateProductPageRoutingModule } from './create-product-routing.module'
 
 import { CreateProductPage } from './create-product.page';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   imports: [
     CommonModule,
+    NgxPaginationModule,
     FormsModule,
     IonicModule,
     CreateProductPageRoutingModule,
