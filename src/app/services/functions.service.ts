@@ -33,10 +33,7 @@ export class FunctionsService {
     return l;
   }
 
-  validateEmail(email) {
-    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
-  }
+ 
 
   checkout() {
     if (this.dataService.current_user.address.length === 0) {
@@ -83,8 +80,8 @@ export class FunctionsService {
   removeConform(): Promise<any> {
     return new Promise(async (resolve, reject) => {
       const alert = await this.alertController.create({
-        header: 'Confirm!',
-        message: 'Are you sure you want to remove this item',
+        header: 'Confirm',
+        message: 'Are you sure you want to remove this item?',
         buttons: [
           {
             text: 'Cancel',
@@ -108,8 +105,10 @@ export class FunctionsService {
     });
   }
 
-  calculate(price, discount) {
-    price = price - (price * discount / 100);
-    return price.toFixed(2);
+  calculate(price:any, discount:any) {
+    if(discount > 0)
+    return (100 * price) / (100 - discount);
+    else 
+    return price;
   }
 }

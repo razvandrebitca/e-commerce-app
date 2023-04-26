@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Platform } from '@ionic/angular';
+import { Component, OnInit } from '@angular/core';
+import { NavController, Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Storage } from "@ionic/storage";
@@ -8,7 +8,7 @@ import { Storage } from "@ionic/storage";
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   public appPages = [
     {
       title: 'Home',
@@ -30,10 +30,22 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private storage:Storage
+    private storage:Storage,
+    private navCtrl: NavController,
   ) {
+    
     this.storage.create();
     this.getUserDetails();
+    
+  }
+  ngOnInit(): void {
+    this.storage.get("userData").then((data) => {
+      if(data.token){
+        this.navCtrl.navigateRoot("/home", {
+          animationDirection: "forward",
+        });
+      }
+  });
   }
   menu(b){
     if(b){
