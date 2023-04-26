@@ -35,25 +35,14 @@ export class HomeComponent implements OnInit {
     private dataService: DataService,
     private http: HttpClient
   ) {
-    this.data = dataService.tabs;
-    this.sponsored = dataService.sponsored;
-    this.product_data_1 = dataService.products_1;
-    this.product_data_2 = dataService.products_2;
-    this.product_data_3 = dataService.products_3;
-    this.product_data_4 = dataService.products_4;
-    this.product_data_5 = dataService.products_5;
-    const d = this.activatedRoute.snapshot.paramMap.get('id');
-    if (d) {
-      this.segment = this.data[parseInt(d, 10)].title;
-    } else {
-      this.segment = this.data[0].title;
-    }
+  
+  
   }
   ngOnInit(): void {
     this.http.get(environment.API_URL+'api/products/').subscribe((res: any) => {
       this.products = res.data;
     });
-  }
+  } 
 
   ionViewDidEnter() {
     this.menuCtrl.enable(true, 'start');

@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AnimationController, IonContent, IonSlides, MenuController, NavController } from '@ionic/angular';
+import {  IonContent, IonSlides, MenuController, ToastController } from '@ionic/angular';
 import { DataService, HomeTab, Product } from 'src/app/services/data.service';
 import { FunctionsService } from 'src/app/services/functions.service';
-import { ProductService } from 'src/app/services/product.service';
+
 
 
 @Component({
@@ -26,16 +26,21 @@ export class ProductDetailsPage implements OnInit {
   data: Array<HomeTab> = [];
 
   product: Product;
+  async successToast() {
+    const toast = await this.toastController.create({
+      message: "Product added succesfully to cart!",
+      duration: 2000,
+      position: "top",
+    });
 
+    await toast.present();
+  }
   constructor(
     private menuCtrl: MenuController,
     private fun: FunctionsService,
-    private dataService: DataService,
-    private nav: NavController) {
-
+    private toastController:ToastController,
+    private dataService: DataService) {
     this.product = dataService.current_product;
-    this.data = dataService.item_tab;
-    this.segment = this.data[0].title;
   }
 
   ngOnInit() {
@@ -68,7 +73,9 @@ export class ProductDetailsPage implements OnInit {
   }
 
   goToCart() {
-    this.fun.navigate('cart', false);
+    this.dataService.cart.push(this.product)
+    // this.fun.navigate('cart', false);
+    this.successToast();
   }
 
   update(i) {

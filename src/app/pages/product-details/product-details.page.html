@@ -9,14 +9,10 @@
 </ion-header>
 
 <ion-content>
-  <ion-slides pager="false" [options]="slideOpts" (ionSlideDidChange)="change()" #Slides>
-    <ion-slide>
       <app-product-data (notify)="onReviewClick($event)" [product]="product" [slider]="slider"
         class="slide"></app-product-data>
-    </ion-slide>
-  </ion-slides>
 </ion-content>
-<ion-footer class="footer align-items-center" *ngIf="segment == 'Overview'">
+<ion-footer class="footer align-items-center">
   <ion-row class="align-items-center">
     <ion-col>
       <ion-text *ngIf="product.discount > 0">

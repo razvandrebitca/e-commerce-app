@@ -30,26 +30,27 @@
         <ion-item lines="none">
           <ion-row>
             <ion-col size="3">
-              <img src="https://picsum.photos/200/200" alt="item.product.name">
+              <img src="https://picsum.photos/200/200" alt="item.name">
               <ion-text color="danger" class="small" (click)="remove(j)">Remove</ion-text>
             </ion-col>
             <ion-col size="6">
-              <h3 class="item-name no-margin">{{item.product.name}}</h3>
-              <h5  class="item-def no-margin">{{item.product.size}}, {{item.product.color}}</h5>
-              <h5 class="item-def no-margin ">shipping: {{item.product.currency}}{{item.product.shipping}}</h5>
-              <h5  class="item-def no-margin">Dec 31 - Jan 17</h5>
+              <h3 class="item-name no-margin">{{item.name}}</h3>
+              <h5 class="item-def no-margin ">shipping: $250</h5>
+              <!-- <h5  class="item-def no-margin">Dec 31 - Jan 17</h5> -->
             </ion-col>
             <ion-col size="3">
               <ion-row>
-                <h3  class="item-name no-margin" *ngIf="item.product.offer">{{item.product.currency}}{{fun.calculate(item.product.cost_price,
-                  item.product.discount)}}</h3>
-                <h3  class="item-name no-margin" *ngIf="item.product.offer"><span class="cut">{{item.product.currency}}{{item.product.cost_price}}</span></h3>
-                <h3 class="item-name no-margin" *ngIf="!item.product.offer">{{item.product.currency}}{{item.product.cost_price}}</h3>
+                <h3  class="item-name no-margin" *ngIf="item.discount>0">
+                  ${{item.totalPrice}}
+                </h3>
+                <h3  class="item-name no-margin" *ngIf="item.discount>0"><span class="cut">${{fun.calculate(item.totalPrice,
+                  item.discount)}}</span></h3>
+                <h3 class="item-name no-margin" *ngIf="item.discount == 0">${{item.totalPrice}}</h3>
               </ion-row>
               <ion-row>
                 <ion-select placeholder="-" interface="popover" [interfaceOptions]="customAlertOptions" [(ngModel)]='item.quantity'
                   class="select">
-                  <ion-select-option *ngFor="let q of qty" (value)="q">{{q}}</ion-select-option>
+                  <ion-select-option *ngFor="let q of countStock(item.stock) " (value)="q">{{q}}</ion-select-option>
                 </ion-select>
               </ion-row>
             </ion-col>
@@ -70,7 +71,7 @@
     </ion-row>
 
     <div lines="none" class="card no-margin">
-      <ion-row class="full" >
+      <!-- <ion-row class="full" >
         <ion-col size="9">
           <ion-text>Item Total</ion-text>
         </ion-col>
@@ -93,7 +94,7 @@
         <ion-col size="3">
           <ion-text>{{data[0].product.currency}}{{fix(add())}}</ion-text>
         </ion-col>
-      </ion-row>
+      </ion-row> -->
       <div class="sep"></div>
       <ion-row>
         <ion-col>

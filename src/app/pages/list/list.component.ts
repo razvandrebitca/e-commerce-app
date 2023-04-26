@@ -20,7 +20,7 @@ export class ListComponent implements OnInit {
   code = '';
   show = true;
   data: Array<Cart> = [];
-
+  stock = [];
   constructor(
     private menuCtrl: MenuController,
     public dataService: DataService,
@@ -35,7 +35,12 @@ export class ListComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  countStock(n: any) {
+    this.stock = [];
+    for (let i = 1; i <= n; i++)
+      this.stock[i] = i;
+      return this.stock;
+  }
   ionViewDidEnter() {
     this.menuCtrl.enable(true, 'start');
     this.menuCtrl.enable(false, 'end');
@@ -46,12 +51,12 @@ export class ListComponent implements OnInit {
     if (b) {
       modal = await this.modalController.create({
         component: '',
-        componentProps: { value: this.dataService.terms_of_use, title: 'Terms of Use' }
+        componentProps: { value: '', title: 'Terms of Use' }
       });
     } else {
       modal = await this.modalController.create({
         component: '',
-        componentProps: { value: this.dataService.privacy_policy, title: 'Privacy Policy' }
+        componentProps: { value:'', title: 'Privacy Policy' }
       });
     }
     return await modal.present();

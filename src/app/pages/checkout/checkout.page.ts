@@ -35,7 +35,6 @@ export class CheckoutPage implements OnInit {
   }
 
   done(){
-    // swal("Awesome", "You just bought 2 awesome dresses", "success");
     this.fun.navigate('home',false);
   }
 
