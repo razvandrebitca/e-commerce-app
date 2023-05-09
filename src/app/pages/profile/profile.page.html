@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Profile
+    </ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <h1>User info</h1>
+  <br>
+  <div>
+    <form [formGroup]="updateGroup" (submit)="updateProfile()">
+      <p>Current name : {{userName}} </p>
+      <br>
+      <ion-item fill="outline" class="row">
+
+        <ion-label position="floating">New name</ion-label>
+        <ion-input formControlName="name" value=""></ion-input>
+      </ion-item>
+      <br>
+      <p>Current email: {{userEmail}} </p>
+      <ion-item lines class="row" fill="outline">
+
+        <ion-label position="floating">New email</ion-label>
+        <ion-input formControlName="email" value=""></ion-input>
+      </ion-item>
+      <br>
+      <ion-button type="submit" expand="full">Save</ion-button>
+    </form>
+
+  </div>
+  <br>
+  <div>
+    <h1>Change password</h1>
+    <br>
+    <ion-item fill="outline" class="row">
+      <ion-label position="floating">New password</ion-label>
+      <ion-input type="password" [(ngModel)]="password"></ion-input>
+    </ion-item>
+    <br>
+    <ion-button (click)="updatePassword()" expand="full">Save</ion-button>
+
+
+  </div>
+
+</ion-content>

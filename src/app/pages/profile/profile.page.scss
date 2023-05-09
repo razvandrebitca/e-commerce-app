@@ -1,0 +1,73 @@
+.backbtn {
+    margin-left: 15px;
+}
+
+.notification {
+    margin-right: 15px;
+}
+
+ion-content {
+    --padding-top: 16px;
+    --padding-bottom: 16px;
+    --padding-start: 26px;
+    --padding-end: 26px;
+}
+
+.title {
+    margin-top: 0;
+    color: #434343;
+}
+
+.profile-info {
+    padding-top: 20px;
+
+    ion-item {
+        --padding-start: 0;
+        --border-color: #97979713;
+
+        ion-label {
+            color: #919191;
+            font-size: larger;
+        }
+
+        ion-input {
+            --color: #434343;
+        }
+    }
+}
+.card {
+    box-shadow: unset;
+    border-radius: 9px;
+    background-color: white !important;
+}
+.price {
+    font-size: 18px;
+    float: left;
+    margin: 3px;
+}
+.inline {
+    font-size: 15px;
+    margin-inline-end: 5px;
+    text-decoration: line-through;
+}
+.subtitle {
+    font-size: 12px;
+    color: rgb(120, 120, 120);
+}
+.badge {
+    position: absolute;
+    top: 10%;
+    left: 0;
+    background-color: rgba(12, 12, 12, .75);
+    border-radius: 0;
+}
+.no-margin{
+    --margin-start: 0;
+    --margin-end: 0;
+    --margin-top: 0;
+    --margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+ }

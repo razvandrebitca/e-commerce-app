@@ -35,6 +35,27 @@
         <ion-label position="floating">Discount</ion-label>
         <ion-input formControlName="discount" required></ion-input>
       </ion-item>
+      <ion-item>
+        <ion-button fill="clear" expand="full" (click)="selectImage()">
+          <ion-icon slot="start" name="camera"></ion-icon>
+          Select Images
+        </ion-button>
+
+      </ion-item>
+      <ion-list>
+        <ion-item *ngFor="let file of images; let i = index">
+          <ion-thumbnail slot="start">
+            <ion-img [src]="file.data"></ion-img>
+          </ion-thumbnail>
+          <ion-label class="ion-text-wrap"> {{ file.name }} </ion-label>
+          <ion-button slot="end" fill="clear" (click)="startUpload(file)">
+            <ion-icon slot="icon-only" name="cloud-upload"></ion-icon>
+          </ion-button>
+          <ion-button slot="end" fill="clear" (click)="deleteImage(file)">
+            <ion-icon slot="icon-only" name="trash"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-list>
       <br>
       <ion-button type="submit" expand="full">Create</ion-button>
     </form>
@@ -71,11 +92,11 @@
   </ion-row>
 
   <div *ngIf="edit==true">
-    <ion-button  color="primary" (click)="edit=false" ><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
+    <ion-button color="primary" (click)="edit=false"><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
     <br><br><br>
-    <ion-button color="danger" (click)="deleteProduct(product.id)" expand="full" >Delete</ion-button>
+    <ion-button color="danger" (click)="deleteProduct(product.id)" expand="full">Delete</ion-button>
     <br>
-    <form  [formGroup]="updateGroup" (submit)="updateProduct(product.id)">
+    <form [formGroup]="updateGroup" (submit)="updateProduct(product.id)">
       <p>Current name : {{product.name}} </p>
       <br>
       <ion-item fill="outline" class="row">
@@ -99,8 +120,8 @@
         <ion-input formControlName="price" value=""></ion-input>
       </ion-item>
       <br>
-     
-        <p>Current stock: {{product.stock}} </p>
+
+      <p>Current stock: {{product.stock}} </p>
       <br>
       <ion-item lines class="row" fill="outline">
 
@@ -108,12 +129,12 @@
         <ion-input formControlName="stock" value=""></ion-input>
       </ion-item>
       <br>
-        <p>Current discount: {{product.discount}} </p>
+      <p>Current discount: {{product.discount}} </p>
       <br>
       <ion-item lines class="row" fill="outline">
 
         <ion-label position="floating">New discount</ion-label>
-        <ion-input formControlName="discount"  value=""></ion-input>
+        <ion-input formControlName="discount" value=""></ion-input>
       </ion-item>
       <br>
       <ion-button type="submit" expand="full">Save</ion-button>

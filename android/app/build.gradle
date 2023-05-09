@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    compileSdk 33
     defaultConfig {
         applicationId "com.commerce.app"
         minSdkVersion rootProject.ext.minSdkVersion

@@ -2,8 +2,16 @@
   <ion-row >
     <ion-col class="padding-0">
       <ion-slides pager="true" [options]="slideOpts">
-        <ion-slide *ngFor="let i of [].constructor(3)">
-          <img class="image" src="https://picsum.photos/500/500">
+        <ion-slide>
+          <img class="image" [src]="product.image_1">
+          <div class="product-image-overlay"></div>
+        </ion-slide>
+        <ion-slide>
+          <img class="image" [src]="product.image_2">
+          <div class="product-image-overlay"></div>
+        </ion-slide>
+        <ion-slide>
+          <img class="image" [src]="product.image_3">
           <div class="product-image-overlay"></div>
         </ion-slide>
       </ion-slides>
