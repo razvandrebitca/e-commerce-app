@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
   selector: 'app-register',
@@ -11,7 +12,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class RegisterPage implements OnInit {
   form: FormGroup;
-  constructor(fb: FormBuilder, private authService: AuthService,private toastController: ToastController,private router: Router) { 
+  constructor(fb: FormBuilder, private authService: AuthService,private toastController: ToastController,private router: Router,private readonly translocoService: TranslocoService) { 
     this.form = fb.group({
       fName: [
         '',
@@ -37,7 +38,7 @@ export class RegisterPage implements OnInit {
   }
   async warningToast() {
     const toast = await this.toastController.create({
-      message: "Error, could not register. Try again!",
+      message: this.translocoService.translate('error'),
       duration: 2000,
       position: "top",
     });
@@ -46,7 +47,7 @@ export class RegisterPage implements OnInit {
   }
   async credentialsToast() {
     const toast = await this.toastController.create({
-      message: "Error, wrong credentials. Try again!",
+      message: this.translocoService.translate('error'),
       duration: 2000,
       position: "top",
     });
@@ -56,7 +57,7 @@ export class RegisterPage implements OnInit {
 
   async successToast() {
     const toast = await this.toastController.create({
-      message: "Success, registered!",
+      message: this.translocoService.translate('success'),
       duration: 2000,
       position: "top",
     });
@@ -88,41 +89,6 @@ export class RegisterPage implements OnInit {
           this.warningToast();
         },
       })
-			// .subscribe(
-			// 	(data) => {
-			// 		this.authService
-			// 			.login(form.value.email, form.value.password)
-			// 			.subscribe(
-			// 				(data) => {},
-			// 				(error) => {
-			// 					console.log(error);
-			// 				},
-			// 				// () => {
-
-			// 				// 	this.navCtrl.navigateRoot("/home", {
-			// 				// 		animationDirection: "forward",
-			// 				// 	});
-			// 				// }
-			// 			);
-			// 		this.alertService.presentToast(data["message"]);
-			// 	},
-			// 	(error) => {
-			// 		console.log(error);
-			// 	},
-			// 	() => {}
-			// );
-			// .subscribe({
-			// 	next: () => {
-			// 		this.alertService.successToast('Registered sucessfully');
-			// 		this.navCtrl.navigateRoot("/login", {
-			// 			animationDirection: "forward",
-			// 		});
-
-			// 	},
-			// 	error: () => {
-			// 		this.alertService.dangerToast('Error');
-			// 	}
-			// })
 	}
   get controls() {
     return this.form.controls;

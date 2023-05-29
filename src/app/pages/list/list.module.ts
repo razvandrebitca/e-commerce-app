@@ -5,12 +5,14 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 
 import { ListComponent} from './list.component';
+import { TranslocoRootModule } from 'src/app/transloco-root.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    TranslocoRootModule,
     RouterModule.forChild([
       {
         path: '',

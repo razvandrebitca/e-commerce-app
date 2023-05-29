@@ -10,9 +10,13 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from    '@ionic/storage-angular' 
 import { NgxPaginationModule } from 'ngx-pagination';
+import { NgxStarRatingModule } from 'ngx-star-rating';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TranslocoRootModule } from './transloco-root.module';
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,HttpClientModule,IonicStorageModule.forRoot(),NgxPaginationModule],
+  imports: [BrowserModule, IonicModule.forRoot(),FormsModule,ReactiveFormsModule, AppRoutingModule,HttpClientModule,IonicStorageModule.forRoot(),NgxPaginationModule,NgxStarRatingModule, NgbModule, TranslocoRootModule],
   providers: [
     StatusBar,
     SplashScreen,

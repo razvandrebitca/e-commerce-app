@@ -3,13 +3,18 @@
     <ion-buttons slot="start">
       <ion-menu-button color="light"></ion-menu-button>
     </ion-buttons>
-    <ion-input type="text" placeholder="I'm shopping for..." [(ngModel)]="term" class="search-bar"></ion-input>
+    <ion-input type="text" :placeholder="{{ 'shopping' | transloco }}" [(ngModel)]="term" class="search-bar"></ion-input>
     <ion-buttons slot="end">
       <ion-button (click)="fun.navigate('cart')">
         <ion-icon name="cart" slot="icon-only" class="white no-margin top-btn"></ion-icon>
       </ion-button>
-      <ion-button (click)="side_open()">
-        <ion-icon name="filter-outline" slot="icon-only" class="white no-margin top-btn"></ion-icon>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button
+        *ngFor="let language of languagesList; index as i"
+        (click)="changeLanguage(language.code)"
+      >
+        <span> {{ language.name }} </span>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>

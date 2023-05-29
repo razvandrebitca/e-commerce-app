@@ -4,41 +4,41 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      My Products
+      {{ 'my_products' | transloco }}
     </ion-title>
 
   </ion-toolbar>
 </ion-header>
 
 <ion-content color="light">
-  <h1 class="title">Create Product</h1>
+  <h1 class="title">{{ 'create_product' | transloco }}</h1>
 
   <div class="profile-info">
     <form [formGroup]="productGroup" (submit)="createProduct()">
       <ion-item>
-        <ion-label position="floating">Name</ion-label>
+        <ion-label position="floating">{{ 'name' | transloco }}</ion-label>
         <ion-input formControlName="name" required></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Description</ion-label>
+        <ion-label position="floating">{{ 'description' | transloco }}</ion-label>
         <ion-input formControlName="detail" required></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Price</ion-label>
+        <ion-label position="floating">{{ 'price' | transloco }} (lei)</ion-label>
         <ion-input formControlName="price" required></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Stock</ion-label>
+        <ion-label position="floating">{{ 'stock' | transloco }}</ion-label>
         <ion-input formControlName="stock" required></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Discount</ion-label>
+        <ion-label position="floating">{{ 'discount' | transloco }}</ion-label>
         <ion-input formControlName="discount" required></ion-input>
       </ion-item>
       <ion-item>
         <ion-button fill="clear" expand="full" (click)="selectImage()">
           <ion-icon slot="start" name="camera"></ion-icon>
-          Select Images
+          {{ 'select_images' | transloco }}
         </ion-button>
 
       </ion-item>
@@ -48,16 +48,13 @@
             <ion-img [src]="file.data"></ion-img>
           </ion-thumbnail>
           <ion-label class="ion-text-wrap"> {{ file.name }} </ion-label>
-          <ion-button slot="end" fill="clear" (click)="startUpload(file)">
-            <ion-icon slot="icon-only" name="cloud-upload"></ion-icon>
-          </ion-button>
-          <ion-button slot="end" fill="clear" (click)="deleteImage(file)">
+          <ion-button slot="end" fill="clear" (click)="deleteImage(i)">
             <ion-icon slot="icon-only" name="trash"></ion-icon>
           </ion-button>
         </ion-item>
       </ion-list>
       <br>
-      <ion-button type="submit" expand="full">Create</ion-button>
+      <ion-button type="submit" expand="full">{{ 'create' | transloco }}</ion-button>
     </form>
   </div>
   <br>
@@ -65,7 +62,7 @@
     <ion-col *ngFor="let data of products | paginate: { itemsPerPage: 10, currentPage: p }" size="6">
       <ion-card class="card no-margin" (click)="editProduct(data)">
         <ion-badge class="badge" *ngIf="data.discount>0 "> {{data.discount}}%</ion-badge>
-        <img src="https://picsum.photos/200/200" [alt]="data.name">
+        <img [src]="data.image_1" [alt]="data.name">
         <ion-card-content>
           <ion-card-title>
             <ion-row>
@@ -75,12 +72,12 @@
             </ion-row>
             <ion-row>
               <ion-col *ngIf="data.discount > 0">
-                <ion-text><span class="price"><span class="inline">$
-                      {{calculateFullPrice(data.totalPrice,data.discount)}}</span></span></ion-text>
-                <ion-text><span class="price"><strong>$ {{data.totalPrice}}</strong></span></ion-text>
+                <ion-text><span class="price"><span class="inline">
+                      {{calculateFullPrice(data.totalPrice,data.discount)}} lei</span></span></ion-text>
+                <ion-text><span class="price"><strong>{{data.totalPrice}} lei</strong></span></ion-text>
               </ion-col>
               <ion-col *ngIf="data.discount == 0">
-                <ion-text><span class="price"><strong>$ {{data.totalPrice}}</strong></span></ion-text>
+                <ion-text><span class="price"><strong>{{data.totalPrice}} lei</strong></span></ion-text>
               </ion-col>
             </ion-row>
 
@@ -94,50 +91,93 @@
   <div *ngIf="edit==true">
     <ion-button color="primary" (click)="edit=false"><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
     <br><br><br>
-    <ion-button color="danger" (click)="deleteProduct(product.id)" expand="full">Delete</ion-button>
+    <ion-button color="danger" (click)="deleteProduct(product.id)" expand="full">{{ 'delete' | transloco }}</ion-button>
     <br>
-    <form [formGroup]="updateGroup" (submit)="updateProduct(product.id)">
-      <p>Current name : {{product.name}} </p>
-      <br>
+    <form [formGroup]="updateGroup" (submit)="updateProduct(product)">
+      <p>{{ 'current_name' | transloco }}: {{product.name}} </p>
       <ion-item fill="outline" class="row">
-
-        <ion-label position="floating">New name</ion-label>
+        <ion-label position="floating">{{ 'new_name' | transloco }}</ion-label>
         <ion-input formControlName="name" value=""></ion-input>
       </ion-item>
       <br>
-      <p>Current description: {{product.description}} </p>
+      <p>{{ 'current_description' | transloco }}: {{product.description}} </p>
       <ion-item lines class="row" fill="outline">
-
-        <ion-label position="floating">New description</ion-label>
+        <ion-label position="floating">{{ 'new_description' | transloco }}</ion-label>
         <ion-input formControlName="detail" value=""></ion-input>
       </ion-item>
       <br>
-      <p>Current price: {{product.totalPrice}} </p>
-      <br>
+      <p>{{ 'current_price' | transloco }}: {{product.totalPrice}} </p>
       <ion-item lines class="row" fill="outline">
-
-        <ion-label position="floating">New price</ion-label>
+        <ion-label position="floating">{{ 'new_price' | transloco }}</ion-label>
         <ion-input formControlName="price" value=""></ion-input>
       </ion-item>
       <br>
-
-      <p>Current stock: {{product.stock}} </p>
-      <br>
+      <p>{{ 'current_stock' | transloco }}: {{product.stock}} </p>
       <ion-item lines class="row" fill="outline">
 
-        <ion-label position="floating">New stock</ion-label>
+        <ion-label position="floating">{{ 'new_stock' | transloco }}</ion-label>
         <ion-input formControlName="stock" value=""></ion-input>
       </ion-item>
       <br>
-      <p>Current discount: {{product.discount}} </p>
-      <br>
+      <p>{{ 'current_discount' | transloco }}: {{product.discount}} </p>
       <ion-item lines class="row" fill="outline">
-
-        <ion-label position="floating">New discount</ion-label>
+        <ion-label position="floating">{{ 'new_discount' | transloco }}</ion-label>
         <ion-input formControlName="discount" value=""></ion-input>
       </ion-item>
       <br>
-      <ion-button type="submit" expand="full">Save</ion-button>
+      <ion-list>
+        <ion-item>
+          <ion-thumbnail *ngIf="!image_1"slot="start">
+            <ion-img [src]="product.image_1"></ion-img>
+          </ion-thumbnail>
+          <ion-thumbnail *ngIf="image_1"slot="start">
+            <ion-img [src]="image_1"></ion-img>
+          </ion-thumbnail>
+        </ion-item>
+      </ion-list>
+      <ion-item>
+        <ion-button fill="clear" expand="full" (click)="selectUpdateImage(1)">
+          <ion-icon slot="start" name="camera"></ion-icon>
+          {{ 'change_image' | transloco }}
+        </ion-button>
+      </ion-item>
+      <br>
+      <ion-list>
+        <ion-item>
+          <ion-thumbnail *ngIf="!image_2" slot="start">
+            <ion-img [src]="product.image_2"></ion-img>
+          </ion-thumbnail>
+          <ion-thumbnail *ngIf="image_2" slot="start">
+            <ion-img [src]="image_2"></ion-img>
+          </ion-thumbnail>
+        </ion-item>
+      </ion-list>
+      <ion-item>
+        <ion-button fill="clear" expand="full" (click)="selectUpdateImage(2)">
+          <ion-icon slot="start" name="camera"></ion-icon>
+          {{ 'change_image' | transloco }}
+        </ion-button>
+      </ion-item>
+      <br>
+      <ion-list>
+        <ion-item>
+          <ion-thumbnail *ngIf="!image_3" slot="start">
+            <ion-img [src]="product.image_3"></ion-img>
+          </ion-thumbnail>
+          <ion-thumbnail *ngIf="image_3" slot="start">
+            <ion-img [src]="image_3"></ion-img>
+          </ion-thumbnail>
+         
+        </ion-item>
+      </ion-list>
+      <ion-item>
+        <ion-button fill="clear" expand="full" (click)="selectUpdateImage(3)">
+          <ion-icon slot="start" name="camera"></ion-icon>
+          {{ 'change_image' | transloco }}
+        </ion-button>
+      </ion-item>
+      <br>
+      <ion-button type="submit" expand="full"> {{ 'save' | transloco }}</ion-button>
     </form>
 
   </div>

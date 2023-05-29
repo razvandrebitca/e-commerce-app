@@ -1,9 +1,15 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { AlertController, ToastController } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
 import { Storage } from '@ionic/storage';
+import { TranslocoService } from '@ngneat/transloco';
+interface LocalFile {
+  name: string;
+  path: string;
+  data: string;
+}
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
@@ -11,9 +17,8 @@ import { Storage } from '@ionic/storage';
 })
 export class ProfilePage implements OnInit {
 
-  password:any='';
+  password: any = '';
   p: any;
-
   updateGroup = new FormGroup({
     name: new FormControl(''),
     email: new FormControl(''),
@@ -25,7 +30,7 @@ export class ProfilePage implements OnInit {
   userId: any = '';
   userName: any = '';
   userEmail: any = '';
-  constructor(private toastController: ToastController, private http: HttpClient, public storage: Storage, public alertController: AlertController) {
+  constructor(private toastController: ToastController, private http: HttpClient, public storage: Storage, public alertController: AlertController,private readonly translocoService: TranslocoService) {
     this.options = {
       headers: new HttpHeaders({
         'Accept': 'application/json',
@@ -37,7 +42,7 @@ export class ProfilePage implements OnInit {
   }
   async warningToast() {
     const toast = await this.toastController.create({
-      message: "Error",
+      message: this.translocoService.translate('error'),
       duration: 2000,
       position: "top",
       color: "danger"
@@ -49,7 +54,7 @@ export class ProfilePage implements OnInit {
 
   async successToast() {
     const toast = await this.toastController.create({
-      message: "Success",
+      message: this.translocoService.translate('success'),
       duration: 2000,
       position: "top",
       color: "success"
@@ -60,20 +65,20 @@ export class ProfilePage implements OnInit {
 
   updateProfile() {
     let data = {
-      'id':this.userId,
-      'name': this.updateGroup.controls['name'].value?this.updateGroup.controls['name'].value:this.userName ,
-      'email': this.updateGroup.controls['email'].value? this.updateGroup.controls['email'].value:this.userEmail,
-
+      'id': this.userId,
+      'name': this.updateGroup.controls['name'].value ? this.updateGroup.controls['name'].value : this.userName,
+      'email': this.updateGroup.controls['email'].value ? this.updateGroup.controls['email'].value : this.userEmail,
     }
     this.http.patch(environment.API_URL + 'api/update-user/', data, this.options).subscribe({
-      next: (data:any) => {
+      next: (data: any) => {
         this.successToast();
         this.userId = data.id;
         this.userName = data.name;
         this.userEmail = data.email;
-        this.storage.set('updatedUser',data);
+        this.storage.set('updatedUser', data);
         this.updateGroup.controls['name'].reset();
         this.updateGroup.controls['email'].reset();
+
       },
       error: () => {
         this.warningToast();
@@ -82,31 +87,34 @@ export class ProfilePage implements OnInit {
   }
   updatePassword() {
     let data = {
-      'id':this.userId,
+      'id': this.userId,
       'name': this.userName,
       'email': this.userEmail,
-      'password':this.password
+      'password': this.password,
     }
-    if(this.password!='')
-    this.http.patch(environment.API_URL + 'api/update-user-password/', data, this.options).subscribe({
-      next: (data:any) => {
-        this.successToast();
-        this.password='';
-      },
-      error: () => {
-        this.warningToast();
-      }
-    })
+    if (this.password != '')
+      this.http.patch(environment.API_URL + 'api/update-user-password/', data, this.options).subscribe({
+        next: (data: any) => {
+          this.successToast();
+          this.password = '';
+        },
+        error: () => {
+          this.warningToast();
+        }
+      })
   }
-  
+ 
+ 
+
   ngOnInit() {
-    this.storage.get('updatedUser').then((data)=>{
-      if(data){
+    this.storage.get('updatedUser').then((data) => {
+      if (data) {
         this.userId = data.id;
         this.userName = data.name;
         this.userEmail = data.email;
+      
       }
-      else{
+      else {
         this.storage.get("userData").then((data) => {
           this.userId = data[0].user.id;
           this.userName = data[0].user.name;
@@ -114,10 +122,5 @@ export class ProfilePage implements OnInit {
         });
       }
     })
-
-    
-
   }
-
-
 }

@@ -34,3 +34,22 @@
     margin-top: 0;
     margin-bottom: 0;
  }
+ .title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 32px;
+
+    h2 {
+        margin: 0 0 0 16px;
+        color: #434343;
+    }
+
+    p {
+        margin: 0 16px 0 0;
+        color: #656565;
+    }
+}
+.font-bold {
+    font-weight: bold;
+}

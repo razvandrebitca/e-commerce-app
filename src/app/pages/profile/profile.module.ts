@@ -9,6 +9,7 @@ import { ProfilePageRoutingModule } from './profile-routing.module';
 import { ProfilePage } from './profile.page';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { TranslocoRootModule } from 'src/app/transloco-root.module';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ProfilePageRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    TranslocoRootModule
   ],
   declarations: [ProfilePage]
 })

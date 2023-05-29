@@ -5,6 +5,7 @@ import { DataService, HomeTab, Product } from '../../services/data.service';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { TranslocoService } from '@ngneat/transloco';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.component.html',
@@ -33,11 +34,27 @@ export class HomeComponent implements OnInit {
     private menuCtrl: MenuController,
     private fun: FunctionsService,
     private dataService: DataService,
-    private http: HttpClient
+    private http: HttpClient,
+    private readonly translocoService: TranslocoService
   ) {
-  
-  
   }
+  public languagesList: 
+  Array<Record< 'code' | 'name', string>> = [
+  {
+  code: 'ro',
+  name: 'RO',
+  },
+  {
+  code: 'en',
+  name: 'EN',
+  }
+];
+public changeLanguage(languageCode: string): void {
+  this.translocoService.setActiveLang(languageCode);
+  languageCode === 'fa'
+  ? (document.body.style.direction = 'rtl')
+  : (document.body.style.direction = 'ltr');
+}
   ngOnInit(): void {
     this.http.get(environment.API_URL+'api/products/').subscribe((res: any) => {
       this.products = res.data;
@@ -73,9 +90,7 @@ export class HomeComponent implements OnInit {
     this.drag();
   }
 
-  side_open() {
-    this.menuCtrl.toggle('end');
-  }
+ 
 
   update(i) {
     this.slides.slideTo(i).then((res) => console.log('responseSlideTo', res));

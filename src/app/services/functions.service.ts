@@ -26,21 +26,18 @@ export class FunctionsService {
   }
 
   array(i) {
+
     const l = [];
-    for (let j = 0; j < i; j++) {
+    for (let j = 0; j < Math.round(i); j++) {
       l.push(1);
     }
     return l;
   }
 
- 
+
 
   checkout() {
-    if (this.dataService.current_user.address.length === 0) {
-      this.nav.navigateForward('/NewAddress/$1');
-    } else {
-      this.nav.navigateForward('/checkout');
-    }
+    this.nav.navigateForward('/checkout');
   }
 
   async presentToast(message, show_button, position, duration) {
@@ -105,10 +102,10 @@ export class FunctionsService {
     });
   }
 
-  calculate(price:any, discount:any) {
-    if(discount > 0)
-    return (100 * price) / (100 - discount);
-    else 
-    return price;
+  calculate(price: any, discount: any) {
+    if (discount > 0)
+      return (100 * price) / (100 - discount);
+    else
+      return price;
   }
 }

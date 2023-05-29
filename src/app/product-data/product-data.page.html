@@ -1,73 +1,62 @@
- <div>
-  <ion-row >
+<div>
+  <ion-row>
     <ion-col class="padding-0">
       <ion-slides pager="true" [options]="slideOpts">
         <ion-slide>
-          <img class="image" [src]="product.image_1">
+          <img class="image" [src]="productData.image_1">
           <div class="product-image-overlay"></div>
         </ion-slide>
         <ion-slide>
-          <img class="image" [src]="product.image_2">
+          <img class="image" [src]="productData.image_2">
           <div class="product-image-overlay"></div>
         </ion-slide>
         <ion-slide>
-          <img class="image" [src]="product.image_3">
+          <img class="image" [src]="productData.image_3">
           <div class="product-image-overlay"></div>
         </ion-slide>
       </ion-slides>
       <ion-badge class="badge">
-        <ion-icon name="images"></ion-icon>3
+        <ion-icon name="images"></ion-icon>
+        3
       </ion-badge>
-    
+
     </ion-col>
   </ion-row>
-  <div padding>
-
+  <div>
     <ion-row lines="none" class="row">
-      <ion-text class="name">{{product.name}}</ion-text>
+      <ion-text class="name">{{productData.name}}</ion-text>
     </ion-row>
-    <ion-row>
-      <ion-icon name="star" color="primary" *ngFor="let i of fun.array(product.rating)"></ion-icon>
-      <ion-icon name="star-outline" color="primary" *ngFor="let i of fun.array(5-product.rating)"></ion-icon>
-    
+    <ion-row class="padding-left">
+      <ion-icon name="star" color="primary" *ngFor="let i of fun.array(productData.rating)"></ion-icon>
+      <h6 class="rate no-margin" (click)="goToReviews()">({{productData.rating}})</h6>
     </ion-row>
-    <h6 class="rate no-margin" (click)="goToReviews()">({{product.rating}})</h6>
     
+
     <ion-list lines="none">
       <div class="sep"></div>
       <ion-row class="full info" (click)="toogle(1)">
         <ion-col size="9">
-          <strong class="float-left">Description</strong>
+          <strong class="float-left">{{ 'description' | transloco }}</strong>
         </ion-col>
         <ion-col>
           <ion-icon class="float-right" name="caret-down-outline" *ngIf="!open[1]"></ion-icon>
           <ion-icon class="float-right" name="caret-up-outline" *ngIf="open[1]"></ion-icon>
         </ion-col>
       </ion-row>
-      <ion-row class="full"  *ngIf="open[1]">
+      <ion-row class="full" *ngIf="open[1]">
         <ion-col>
-          <span class="float-left">{{product.description}}</span>
-        </ion-col>
-      </ion-row>
-      <div class="sep"></div>
-      <ion-row class="full info" (click)="toogle(2)">
-        <ion-col size="9">
-          <strong class="float-left">Buyer Guarantee</strong>
-        </ion-col>
-        <ion-col>
-          <ion-icon class="float-right" name="caret-down-outline" *ngIf="!open[2]"></ion-icon>
-          <ion-icon class="float-right" name="caret-up-outline" *ngIf="open[2]"></ion-icon>
+          <span class="float-left">{{productData.description}}</span>
         </ion-col>
       </ion-row>
       <ion-row *ngIf="open[2]">
         <ion-col>
-          <span class="float-left">{{product.description}}</span>
+          <span class="float-left">{{productData.description}}</span>
         </ion-col>
       </ion-row>
       <div class="sep"></div>
       <ion-row class="full info" (click)="toogle(3)">
         <ion-col size="9">
-          <strong class="float-left">Shipping Information</strong>
+          <strong class="float-left">{{ 'seller_info' | transloco }}</strong>
         </ion-col>
         <ion-col>
           <ion-icon class="float-right" name="caret-down-outline" *ngIf="!open[3]"></ion-icon>
@@ -76,34 +65,80 @@
       </ion-row>
       <ion-row class="full" *ngIf="open[3]">
         <ion-col>
-          <span class="float-left">Standard Shipping {{product.totalPrice}}</span>
+          <span class="float-left"> {{ 'name' | transloco }}: {{product.user.name}}</span>
+        </ion-col>
+        <ion-col>
+          <span class="float-left"> {{ 'email' | transloco }}: {{product.user.email}}</span>
         </ion-col>
       </ion-row>
-      <!-- <div class="sep"></div> -->
-      <div (touchstart)="remove()" (touchend)="gainback()" *ngFor="let spon of product.sponsored">
-        <ion-text>
-          <h5 class="no-margin" ><strong>Sponsored</strong></h5>
-        </ion-text>
-        <ion-row>
-          <ion-row class="container-outer">
-            <div  (click)="open_item(data)" class="container-inner">
-              <img src="https://picsum.photos/500/500" class="spon-img">
-              <ion-row>
-                <ion-col *ngIf="spon.discount > 0" >
-                  <ion-text>
-                    <h4 class="price"><span class="inline">${{product.totalPrice}}</span> <strong>${{product.totalPrice}}</strong></h4>
-                  </ion-text>
-                </ion-col>
-                <ion-col *ngIf="!spon.discount == 0">
-                  <ion-text>
-                    <h4 class="price"><strong>${{product.totalPrice}}</strong></h4>
-                  </ion-text>
-                </ion-col>
-              </ion-row>
-            </div>
-          </ion-row>
-        </ion-row>
-      </div>
+      <div class="sep"></div>
     </ion-list>
+    <ion-title position="stacked">{{ 'your_rating' | transloco }}</ion-title>
+    <ion-buttons class="padding-top">
+      <ng-container *ngFor="let i of [1,2,3,4,5]">
+        <ion-button (click)="starClicked(i)">
+          <ion-icon color="primary" slot="icon-only" *ngIf="i<=stars" name="star">
+          </ion-icon>
+          <ion-icon color="primary" slot="icon-only" *ngIf="i>stars" name="star-outline">
+          </ion-icon>
+        </ion-button>
+      </ng-container>
+    </ion-buttons>
+    <ion-item class="padding-top" fill="outline" class="row">
+        <ion-label position="floating">{{ 'enter_comment' | transloco }}</ion-label>
+        <ion-input [(ngModel)]="review" value=""></ion-input>
+      </ion-item>
+    <br>
+    <ion-button expand="full" (click)="sendReview()">{{ 'send' | transloco}}</ion-button>
+    <br>
+    <ion-title *ngIf="edit==false">{{ 'comments' | transloco }}</ion-title>
+    <ion-title *ngIf="edit==true">{{ 'edit_review' | transloco }}</ion-title>
+    <br>
+    <div *ngIf="edit==true">
+      <ion-button class="padding-left" color="primary" (click)="edit=false"><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
+      <br><br>
+      <ion-button color="danger" (click)="deleteComment(comment.id)" expand="full">{{ 'delete' | transloco }}</ion-button>
+      <br>
+      <p class="padding-left">{{ 'current_star_review' | transloco }}:
+        <br><br>
+        <ion-icon name="star" class="star-size" color="primary" *ngFor="let i of fun.array(comment.star)"></ion-icon>
+      </p>
+      <p class="padding-left"> {{ 'new_star_review' | transloco }}:
+        <ion-buttons>
+          <ng-container *ngFor="let i of [1,2,3,4,5]">
+            <ion-button (click)="editStarClicked(i)">
+              <ion-icon color="primary" slot="icon-only" *ngIf="i<=edited_stars" name="star">
+              </ion-icon>
+              <ion-icon color="primary" slot="icon-only" *ngIf="i>edited_stars" name="star-outline">
+              </ion-icon>
+            </ion-button>
+          </ng-container>
+        </ion-buttons>
+      </p>
+
+      <p class="padding-left ">{{ 'current_comment' | transloco }}: <br>{{comment.review}} </p>
+      <ion-item lines class="row" fill="outline">
+        <ion-label position="floating">{{ 'new_comment' | transloco }}</ion-label>
+        <ion-input [(ngModel)]="edited_comment"></ion-input>
+      </ion-item>
+      <br>
+      <ion-button (click)="updateReview(comment.review,comment.star,comment.id)" expand="full">{{ 'save' | transloco }}</ion-button>
+    </div>
+    <span *ngIf="edit==false">
+
+      <div class="comments" *ngFor="let comment of comments">
+        <ion-card (click)="editComment(comment)">
+          <ion-card-header>
+            <ion-card-title>{{comment.user.name}}</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+            {{comment.review}}
+          </ion-card-content>
+        </ion-card>
+        <br>
+      </div>
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </span>
   </div>
 </div>

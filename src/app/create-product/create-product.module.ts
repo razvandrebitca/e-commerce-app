@@ -9,6 +9,7 @@ import { CreateProductPageRoutingModule } from './create-product-routing.module'
 import { CreateProductPage } from './create-product.page';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { TranslocoRootModule } from '../transloco-root.module';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     IonicModule,
     CreateProductPageRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    TranslocoRootModule,
   ],
   declarations: [CreateProductPage]
 })

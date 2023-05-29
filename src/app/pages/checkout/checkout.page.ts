@@ -19,7 +19,14 @@ import { AlertController, MenuController } from '@ionic/angular';
   styleUrls: ['./checkout.page.scss'],
 })
 export class CheckoutPage implements OnInit {
-  addNewPayment = false
+  addNewPayment = false;
+  cardNumber='';
+  cvv='';
+  expiryDate='';
+  addressLine='';
+  city='';
+  country='';
+  zip='';
   constructor(private menuCtrl: MenuController, private fun: FunctionsService, private dataService: DataService, private alertController: AlertController) { }
 
   ngOnInit() {
@@ -29,38 +36,7 @@ export class CheckoutPage implements OnInit {
     this.menuCtrl.enable(false, 'start');
     this.menuCtrl.enable(false, 'end');
   }
-
-  addPayment(){
-    this.addNewPayment = !this.addNewPayment;
-  }
-
   done(){
     this.fun.navigate('home',false);
   }
-
-
-
-  async back() {
-    const alert = await this.alertController.create({
-      header: 'Are you sure?',
-      message: 'Do you want to cancel entering your payment info?',
-      buttons: [
-        {
-          text: 'Yes',
-          cssClass: 'mycolor',
-          handler: (blah) => {
-            this.fun.back();
-          }
-        }, {
-          text: 'No',
-          role: 'cancel',
-          cssClass: 'mycolor',
-          handler: () => {}
-        }
-      ]
-    });
-
-    await alert.present();
-  }
-
 }

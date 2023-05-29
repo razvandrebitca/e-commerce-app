@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
 import { Storage } from "@ionic/storage";
+import { TranslocoService } from '@ngneat/transloco';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -15,7 +16,8 @@ export class LoginPage implements OnInit {
     private router: Router,
     private authService: AuthService,
     private toastController: ToastController,
-    private storage:Storage
+    private storage:Storage,
+    private readonly translocoService: TranslocoService
     ) {
     this.form = fb.group({
       email: [
@@ -28,9 +30,26 @@ export class LoginPage implements OnInit {
       ]
     });
   }
+  public languagesList: 
+  Array<Record< 'code' | 'name', string>> = [
+  {
+  code: 'ro',
+  name: 'Română',
+  },
+  {
+  code: 'en',
+  name: 'English',
+  }
+];
+public changeLanguage(languageCode: string): void {
+  this.translocoService.setActiveLang(languageCode);
+  languageCode === 'fa'
+  ? (document.body.style.direction = 'rtl')
+  : (document.body.style.direction = 'ltr');
+}
   async warningToast() {
     const toast = await this.toastController.create({
-      message: "Error, could not login. Try again!",
+      message: this.translocoService.translate('error'),
       duration: 2000,
       position: "top",
     });
@@ -39,7 +58,7 @@ export class LoginPage implements OnInit {
   }
   async credentialsToast() {
     const toast = await this.toastController.create({
-      message: "Error, wrong credentials. Try again!",
+      message: this.translocoService.translate('error'),
       duration: 2000,
       position: "top",
     });
@@ -49,9 +68,10 @@ export class LoginPage implements OnInit {
 
   async successToast() {
     const toast = await this.toastController.create({
-      message: "Success, logged in!",
+      message: this.translocoService.translate('success'),
       duration: 2000,
       position: "top",
+      color:"success"
     });
 
     await toast.present();
@@ -74,17 +94,6 @@ export class LoginPage implements OnInit {
         this.warningToast();
       },
     })
-    //   .subscribe((res: any) => {
-    //     // Store the access token in the localstorage
-    //     localStorage.setItem('access_token', res.token);
-    // Navigate to home page
-    // this.router.navigate(['/']);
-    // }, (err: any) => {
-    //   // This error can be internal or invalid credentials
-    //   // You need to customize this based on the error.status code
-
-    // });
-
   }
   ngOnInit() {
   }

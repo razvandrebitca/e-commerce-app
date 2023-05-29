@@ -19,6 +19,7 @@ export interface Notification {
 }
 
 export interface Product {
+  id: any;
   name: string,
   image: Array<string>,
   size: string,
@@ -68,25 +69,5 @@ export class DataService {
 
   constructor() { }
   cart: any = [];
-  current_product: any = {};
-
-  current_user: any = {
-    fname: 'User',
-    uid: 'ALSIOCSIIUAISUC',
-    did: 'JIOU-ASBB-C871-0345',
-    aid: 'ASBB-ASBB-C871-0345',
-    lname: 'User',
-    email: 'user@mail.com',
-    billing: [{card_number:'3124',expiry_date:'12/22'},{card_number:'4564',expiry_date:'03/25'}],
-    address: [{ address_line_1: 'liberty square', address_line_2: 'victory square', city: 'timisoara', last_name: 'usrr', phone_number: 1125532553, zipcode: 12345, country: 'Romania', first_name: 'User', state: 'Timis' },
-    { address_line_1: 'office', address_line_2: 'Office', city: 'Bucharest', last_name: 'User 3', phone_number: 1125532553, zipcode: 12345, country: 'Romania', first_name: 'User 1', state: 'Bucharest' }]
-  };
-
-  wish_cash = {
-    currency: '$',
-    amount: 0.00,
-    history: [{ amount: 10 }, { amount: 20 }]
-  };
-
-  
+  current_product: any = {};  
 }

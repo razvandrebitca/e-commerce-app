@@ -9,6 +9,7 @@ import { ProductlistPage } from 'src/app/productlist/productlist.page';
 import { HttpClientModule } from '@angular/common/http';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { TranslocoRootModule } from 'src/app/transloco-root.module';
 @NgModule({
   imports: [
     CommonModule,
@@ -22,7 +23,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ]),
     HttpClientModule,
     Ng2SearchPipeModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    TranslocoRootModule,
   ],
   declarations: [HomeComponent, ProductlistPage],
   entryComponents: [ProductlistPage],

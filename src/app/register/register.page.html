@@ -1,33 +1,27 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title>Register</ion-title>
-  </ion-toolbar>
-</ion-header>
-<ion-content>
-  <form [formGroup]="form" (submit)="register()">
-    <ion-item lines="full">
-      <ion-label position="floating">First name</ion-label>
-      <ion-input type="text" id="fName" formControlName="fName" required></ion-input>
-    </ion-item>
-    <ion-item lines="full">
-      <ion-label position="floating">Last name</ion-label>
-      <ion-input type="text"id="lName" formControlName="lName"  required></ion-input>
-    </ion-item>
-    <ion-item lines="full">
-      <ion-label position="floating">Email</ion-label>
-      <ion-input type="text"  id="email" formControlName="email" required></ion-input>
-    </ion-item>
-    <ion-item lines="full">
-      <ion-label position="floating">Password</ion-label>
-      <ion-input type="password" id="password" formControlName="password"  required></ion-input>
-    </ion-item>
-    <ion-row>
-      <ion-col>
-        <ion-button type="submit" color="danger" expand="block">Sign Up</ion-button>
-      </ion-col>
-    </ion-row>
-  </form>
+<ion-content expand="fullscreen">
+  <div class="container">
+    <h1 class="heading">🚀 {{ 'create_account' | transloco }}<br><br></h1>
+    <p class="instruction">{{ 'register_instruction' | transloco }}</p>
+    <form [formGroup]="form" (submit)="register()">
+      <ion-item lines="full">
+        <ion-label position="floating">{{ 'first_name' | transloco }}</ion-label>
+        <ion-input type="text" id="fName" formControlName="fName" required></ion-input>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label position="floating">{{ 'last_name' | transloco }}</ion-label>
+        <ion-input type="text"id="lName" formControlName="lName"  required></ion-input>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label position="floating">{{ 'email' | transloco }}</ion-label>
+        <ion-input type="text"  id="email" formControlName="email" required></ion-input>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label position="floating">{{ 'password' | transloco }}</ion-label>
+        <ion-input type="password" id="password" formControlName="password"  required></ion-input>
+      </ion-item>
+      <p class="signup-text">{{ 'existing_user' | transloco }}.&nbsp;<a routerLink="/login"
+        routerDirection="forward">{{ 'login' | transloco }}</a></p>
+      <ion-button class="login-button" type="submit" expand="block">{{ 'register' | transloco }}</ion-button>
+    </form>
+  </div>
 </ion-content>

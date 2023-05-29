@@ -3,6 +3,7 @@ import { NavController, Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Storage } from "@ionic/storage";
+import { TranslocoService } from '@ngneat/transloco';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -11,22 +12,22 @@ import { Storage } from "@ionic/storage";
 export class AppComponent implements OnInit {
   public appPages = [
     {
-      title: 'Home',
+      title: this.translocoService.translate('home'),
       url: '/home',
       icon: 'home',
     },
     {
-      title: 'Profile',
+      title: this.translocoService.translate('profile'),
       url: '/profile',
       icon: 'person',
     },
     {
-      title: 'My Products',
+      title: `${this.translocoService.translate('my_products')}`,
       url: '/my-products',
       icon: 'create',
     },
   ];
-
+selectedFilter:any;
   userName;
   isLoggedIn: any = true;
   side_open = true;
@@ -35,25 +36,23 @@ export class AppComponent implements OnInit {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private storage:Storage,
+    private storage: Storage,
     private navCtrl: NavController,
+    private readonly translocoService: TranslocoService
   ) {
-    
     this.storage.create();
-    this.getUserDetails();
-    
   }
   ngOnInit(): void {
     this.storage.get("userData").then((data) => {
-      if(data.token){
+      if (data.token) {
         this.navCtrl.navigateRoot("/home", {
           animationDirection: "forward",
         });
       }
-  });
+    });
   }
-  menu(b){
-    if(b){
+  menu(b) {
+    if (b) {
       this.side_open = false;
       this.side_open1 = true;
     }
@@ -62,11 +61,11 @@ export class AppComponent implements OnInit {
       this.side_open1 = false;
     }
   }
-  logout(){
+  logout() {
     this.storage.clear();
   }
 
-  back(){
+  back() {
     this.side_open = true;
   }
   initializeApp() {
@@ -76,7 +75,5 @@ export class AppComponent implements OnInit {
     });
   }
 
-  getUserDetails() {
-    this.userName = 'User';
-  }
+
 }

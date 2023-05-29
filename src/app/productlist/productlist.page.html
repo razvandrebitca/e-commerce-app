@@ -1,4 +1,4 @@
- <ion-row>
+ <ion-row *ngIf="term">
   <ion-col *ngFor="let data of recieved_data |filter:term | paginate: { itemsPerPage: 10, currentPage: p };" size="6">
     <ion-card class="card no-margin" (click)="open(data)">
       <ion-badge class="badge" *ngIf="data.discount>0">{{data.discount}}%</ion-badge>
@@ -12,11 +12,11 @@
           </ion-row>
           <ion-row>
             <ion-col *ngIf="data.discount > 0">
-              <ion-text ><span class="price"><span class="inline">$ {{calculateFullPrice(data.totalPrice,data.discount)}}</span></span></ion-text>
-              <ion-text ><span class="price"><strong>$ {{data.totalPrice}}</strong></span></ion-text>
+              <ion-text ><span class="price"><span class="inline">{{calculateFullPrice(data.totalPrice,data.discount)}} lei</span></span></ion-text>
+              <ion-text ><span class="price"><strong>{{data.totalPrice}} lei</strong></span></ion-text>
             </ion-col>
             <ion-col *ngIf="data.discount == 0" >
-              <ion-text><span class="price"><strong>$ {{data.totalPrice}}</strong></span></ion-text>
+              <ion-text><span class="price"><strong>{{data.totalPrice}} lei</strong></span></ion-text>
             </ion-col>
           </ion-row>
         </ion-card-title>
@@ -25,3 +25,8 @@
   </ion-col>
   <pagination-controls (pageChange)="p = $event"></pagination-controls>
 </ion-row>
+<div *ngIf="!term">
+  <div class="title ion-padding">
+    <h2 class="font-bold">{{ 'search_instruction' | transloco }}</h2>
+  </div>
+</div>

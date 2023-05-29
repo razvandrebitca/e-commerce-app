@@ -15,15 +15,15 @@
       </button>
     </ion-row>
     <ion-row size="12" class="justify-content-center" disabled="true">
-      <ion-text><strong>Your cart is empty</strong></ion-text>
+      <ion-text><strong>{{ 'empty_cart' | transloco }}</strong></ion-text>
     </ion-row>
     <ion-row size="12" class="justify-content-center" disabled="true">
-      <ion-button fill="clear" color="primary" (click)="browse()">Browse Products</ion-button>
+      <ion-button fill="clear" color="primary" (click)="browse()">{{ 'browse' | transloco }}</ion-button>
     </ion-row>
   </div>
   <div *ngIf="show">
     <ion-row class="margin-horizontal margin">
-      <ion-text><strong class="text">Items in Cart</strong></ion-text>
+      <ion-text><strong class="text">{{ 'items_cart' | transloco }}</strong></ion-text>
     </ion-row>
     <ion-list #slidingList>
       <ion-item-sliding *ngFor="let item of data; let j = index;" class="card" >
@@ -31,11 +31,11 @@
           <ion-row>
             <ion-col size="3">
               <img [src]="item.image_1" alt="item.name">
-              <ion-text color="danger" class="small" (click)="remove(j)">Remove</ion-text>
+              <ion-text color="danger" class="small" (click)="remove(j)">{{ 'remove' | transloco }}</ion-text>
             </ion-col>
             <ion-col size="6">
               <h3 class="item-name no-margin">{{item.name}}</h3>
-              <h5 class="item-def no-margin ">shipping: $250</h5>
+              <!-- <h5 class="item-def no-margin ">shipping: 250 lei</h5> -->
               <!-- <h5  class="item-def no-margin">Dec 31 - Jan 17</h5> -->
             </ion-col>
             <ion-col size="3">
@@ -43,9 +43,9 @@
                 <h3  class="item-name no-margin" *ngIf="item.discount>0">
                   ${{item.totalPrice}}
                 </h3>
-                <h3  class="item-name no-margin" *ngIf="item.discount>0"><span class="cut">${{fun.calculate(item.totalPrice,
-                  item.discount)}}</span></h3>
-                <h3 class="item-name no-margin" *ngIf="item.discount == 0">${{item.totalPrice}}</h3>
+                <h3  class="item-name no-margin" *ngIf="item.discount>0"><span class="cut">{{fun.calculate(item.totalPrice,
+                  item.discount)}} lei</span></h3>
+                <h3 class="item-name no-margin" *ngIf="item.discount == 0">{{item.totalPrice}} lei</h3>
               </ion-row>
               <ion-row>
                 <ion-select placeholder="-" interface="popover" [interfaceOptions]="customAlertOptions" [(ngModel)]='item.quantity'
@@ -64,54 +64,19 @@
       </ion-item-sliding>
     </ion-list>
     <ion-row size="12" class="justify-content-center" disabled="true">
-        <ion-button fill="outline" color="primary" (click)="browse()">Continue shopping</ion-button>
+        <ion-button fill="outline" color="primary" (click)="browse()">{{ 'continue' | transloco }}</ion-button>
       </ion-row>
     <ion-row>
       <ion-text><strong class="text">Order Summary</strong></ion-text>
     </ion-row>
 
     <div lines="none" class="card no-margin">
-      <!-- <ion-row class="full" >
-        <ion-col size="9">
-          <ion-text>Item Total</ion-text>
-        </ion-col>
-        <ion-col size="3">
-          <ion-text>{{data[0].product.currency}}{{fix(calculate(0))}}</ion-text>
-        </ion-col>
-      </ion-row>
-      <ion-row class="full" >
-        <ion-col size="9">
-          <ion-text>Shipping</ion-text>
-        </ion-col>
-        <ion-col size="3">
-          <ion-text>{{data[0].product.currency}}{{fix(calculate(1))}}</ion-text>
-        </ion-col>
-      </ion-row>
-      <ion-row class="full">
-        <ion-col size="9">
-          <ion-text>Item Total</ion-text>
-        </ion-col>
-        <ion-col size="3">
-          <ion-text>{{data[0].product.currency}}{{fix(add())}}</ion-text>
-        </ion-col>
-      </ion-row> -->
-      <div class="sep"></div>
-      <ion-row>
-        <ion-col>
-          <ion-text class="item-def">
-            <div class="pad">
-              By tapping 'Checkout' you aggree to the <a (click)="open_modal(true)" class="mycolor">Terms of Use</a>
-              and <a class="mycolor" (click)="open_modal(false)">Privacy Policy</a>
-            </div>
-          </ion-text>
-        </ion-col>
-      </ion-row>
       <div class="sep"></div>
       <ion-row>
         <ion-col>
           <ion-text class="item-def padding-bottom" >
             <div class="mycolor pad">
-              30 Day Free Return and Refund
+              {{ '30_days' | transloco }}
             </div>
           </ion-text>
         </ion-col>
@@ -121,6 +86,6 @@
 </ion-content>
 <ion-footer *ngIf="show" (click)="fun.checkout()">
   <ion-toolbar color="success">
-    <ion-title>Checkout</ion-title>
+    <ion-title>{{ 'checkout' | transloco }}</ion-title>
   </ion-toolbar>
 </ion-footer>

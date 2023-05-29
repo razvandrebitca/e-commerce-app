@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {  IonContent, IonSlides, MenuController, ToastController } from '@ionic/angular';
+import { TranslocoService } from '@ngneat/transloco';
 import { DataService, HomeTab, Product } from 'src/app/services/data.service';
 import { FunctionsService } from 'src/app/services/functions.service';
 
@@ -28,9 +29,10 @@ export class ProductDetailsPage implements OnInit {
   product: Product;
   async successToast() {
     const toast = await this.toastController.create({
-      message: "Product added succesfully to cart!",
+      message:this.translocoService.translate('success'),
       duration: 2000,
       position: "top",
+      color:"success"
     });
 
     await toast.present();
@@ -39,7 +41,9 @@ export class ProductDetailsPage implements OnInit {
     private menuCtrl: MenuController,
     private fun: FunctionsService,
     private toastController:ToastController,
-    private dataService: DataService) {
+    private dataService: DataService,
+    private readonly translocoService: TranslocoService
+    ) {
     this.product = dataService.current_product;
   }
 
@@ -74,7 +78,6 @@ export class ProductDetailsPage implements OnInit {
 
   goToCart() {
     this.dataService.cart.push(this.product)
-    // this.fun.navigate('cart', false);
     this.successToast();
   }
 

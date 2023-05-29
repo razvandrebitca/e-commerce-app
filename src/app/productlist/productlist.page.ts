@@ -10,13 +10,12 @@ import { FunctionsService } from '../services/functions.service';
   inputs: ['recieved_data','term']
 })
 export class ProductlistPage implements OnInit {
-p:any;
+ p:any;
   constructor(private fun: FunctionsService, private nav: NavController, private dataService:DataService) { }
 
   ngOnInit() {
   }
   open(data){
-    // this.dataService.current_product  = data;
     this.fun.update(data);
     this.nav.navigateForward('/product-details');
   }

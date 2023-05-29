@@ -3,103 +3,68 @@
     <ion-buttons slot="start">
       <ion-back-button color="light"></ion-back-button>
     </ion-buttons>
-    <ion-title color="light">Billing</ion-title>
+    <ion-title color="light">{{ 'checkout' | transloco }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
 
-  <ion-list class="no-margin">
-    <ion-radio-group>
-      <ion-list-header color="light">
-        <ion-label>Select payment method</ion-label>
-      </ion-list-header>
 
-      <ion-item *ngFor="let add of dataService.current_user.billing; let i = index;">
-        <ion-label>
-          <ion-row class="full" class="align-items-center">
-            <ion-col size="10">
-              <ion-row class="align-items-center">
-                <p class="no-margin"><strong>XXXX-XXXX-XXXX-{{add.card_number}}</strong></p>
-              </ion-row>
-              <ion-row >
-                <p class="small" class="no-margin">Expiry date: {{add.expiry_date}}</p>
-              </ion-row>
-            </ion-col>
-          </ion-row>
-        </ion-label>
+  <ion-list-header color="light">
+    <ion-label>{{ 'type_payment' | transloco }} </ion-label>
+  </ion-list-header>
 
-        <ion-radio slot="start" value="{{i}}" checked></ion-radio>
-      </ion-item>
-
-    </ion-radio-group>
-  </ion-list>
-  <ion-row class="justify-content-center padding-top padding-bottom">
-    <ion-text color="primary" (click)="addPayment()">
-      {{addNewPayment ? 'Cancel' : 'Add new payment method'}}
-    </ion-text>
-  </ion-row>
-
-  <div *ngIf="addNewPayment" class="add-payment-div">
+  <div  class="add-payment-div">
     <ion-row>
       <ion-col>
-        <ion-text><span class="label">Credit/Debit Number</span></ion-text>
-        <ion-input class="input"  type="number" placeholder="Credit/Debit Number"></ion-input>
+        <ion-text><span class="label">{{ 'card_number' | transloco }}</span></ion-text>
+        <ion-input [(ngModel)]="creditNumber" class="input"  type="number" placeholder="Credit/Debit Number"></ion-input>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
-        <ion-text><span class="label">Security Code(CVV)</span></ion-text>
-        <ion-input class="input"  type="number" placeholder="CVV"></ion-input>
+        <ion-text><span class="label">CVV</span></ion-text>
+        <ion-input class="input" [(ngModel)]="cvv" type="number" placeholder="CVV"></ion-input>
       </ion-col>
       <ion-col>
-        <ion-text><span class="label">Expiry Date</span></ion-text>
-        <ion-input class="input" placeholder="MM/YY"></ion-input>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <h5 class="no-margin label">Billing Zip/Postal Code</h5>
-        <h6 class="small">The zip or postal code from the address registered for this card</h6>
-      </ion-col>
-      <ion-col>
-        <ion-input class="input" placeholder="Zip/Postal Code" ></ion-input>
+        <ion-text><span class="label">{{ 'expiry_date' | transloco }}</span></ion-text>
+        <ion-input class="input" [(ngModel)]="expiryDate" placeholder="MM/YY"></ion-input>
       </ion-col>
     </ion-row>
   </div>
-  <ion-list>
-    <ion-radio-group>
-      <ion-list-header color="light">
-        <ion-label>Delivery Address</ion-label>
-      </ion-list-header>
+  <ion-list-header color="light">
+    <ion-label>{{ 'type_address' | transloco }}</ion-label>
+  </ion-list-header>
 
-      <ion-item *ngFor="let add of dataService.current_user.address; let i = index;">
-        <ion-label>
-          <ion-row class="align-items-center">
-            <p class="no-margin"><strong>{{add.first_name}} {{add.last_name}}</strong></p>
-          </ion-row>
-          <ion-row>
-            <p class="no-margin">{{add.address_line_1}}, {{add.address_line_2}}</p>
-          </ion-row>
-          <ion-row>
-            <p class="no-margin">{{add.city}}, {{add.state}}</p>
-          </ion-row>
-          <ion-row>
-            <p class="no-margin">{{add.country}}</p>
-          </ion-row>
-          <ion-row>
-            <p class="no-margin">{{add.zipcode}}</p>
-          </ion-row>
-        </ion-label>
-
-        <ion-radio slot="start" value="{{i}}" checked></ion-radio>
-      </ion-item>
-
-    </ion-radio-group>
-  </ion-list>
+  <div  class="add-payment-div">
+    <ion-row>
+      <ion-col>
+        <ion-text><span class="label">{{ 'address_line' | transloco }}</span></ion-text>
+        <ion-input class="input" [(ngModel)]="addressLine"   placeholder="Address Line"></ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-text><span class="label">{{ 'city' | transloco }}</span></ion-text>
+        <ion-input class="input" [(ngModel)]="city"   placeholder="City"></ion-input>
+      </ion-col>
+    </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-text><span class="label">{{ 'country' | transloco }}</span></ion-text>
+          <ion-input class="input" [(ngModel)]="country"   placeholder="Country"></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-text><span class="label">{{ 'zip' | transloco }}</span></ion-text>
+          <ion-input class="input" [(ngModel)]="zip" placeholder="Zip code"></ion-input>
+        </ion-col>
+      </ion-row>
+  </div>
 </ion-content>
 <ion-footer (click)="done()">
   <ion-toolbar color="success">
-    <ion-title>Done</ion-title>
+    <ion-title>{{ 'pay' | transloco }}</ion-title>
   </ion-toolbar>
 </ion-footer>

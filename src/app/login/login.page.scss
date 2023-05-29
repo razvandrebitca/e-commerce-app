@@ -1,0 +1,39 @@
+.heading{
+    font-size: 32px;
+    font-weight: bold;
+    padding-left: 20px;
+    margin-top: 70px;
+    margin-bottom: -45px;
+}
+.instruction{
+    font-size: 22px;
+    font-weight: 500;
+    padding-left: 20px;
+    margin-bottom: 70px;
+    color: #A6ABB1;
+}
+.forget-text{
+    a{
+        text-decoration: none;
+    }
+    text-align: end;
+    margin-bottom: -10px;
+    padding-right: 20px;
+}
+.login-button{
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 50px;
+    --border-radius: 12px;
+    margin-top: 60px;
+    --box-shadow: none;
+}
+
+.signup-text{
+    a{
+        text-decoration: none;
+        color: var(--ion-color-primary);
+    }
+    padding-right: 20px;
+    text-align: end;
+}
