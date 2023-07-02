@@ -28,16 +28,6 @@ export class HomeComponent implements OnInit {
     effect: 'flip',
     zoom: false
   };
-
-  constructor(
-    private activatedRoute: ActivatedRoute,
-    private menuCtrl: MenuController,
-    private fun: FunctionsService,
-    private dataService: DataService,
-    private http: HttpClient,
-    private readonly translocoService: TranslocoService
-  ) {
-  }
   public languagesList: 
   Array<Record< 'code' | 'name', string>> = [
   {
@@ -49,6 +39,16 @@ export class HomeComponent implements OnInit {
   name: 'EN',
   }
 ];
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private menuCtrl: MenuController,
+    private fun: FunctionsService,
+    private dataService: DataService,
+    private http: HttpClient,
+    private readonly translocoService: TranslocoService
+  ) {
+  }
+  
 public changeLanguage(languageCode: string): void {
   this.translocoService.setActiveLang(languageCode);
   languageCode === 'fa'

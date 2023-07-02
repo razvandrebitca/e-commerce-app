@@ -16,7 +16,6 @@ export class ListComponent implements OnInit {
     translucent: true
   };
 
-  qty = [];
   code = '';
   show = true;
   data: Array<Cart> = [];
@@ -30,7 +29,7 @@ export class ListComponent implements OnInit {
     public alertController: AlertController) {
     this.data = dataService.cart;
     if (this.data.length === 0) { this.show = false; }
-    for (let i = 1; i <= 36; i++) { this.qty.push(i); }
+   
   }
 
   ngOnInit() {
@@ -97,7 +96,6 @@ export class ListComponent implements OnInit {
 
   async remove(j) {
     this.fun.removeConform().then(res => {
-      console.log('res conform', res);
       if (res === 'ok') {
         this.slidingList.closeSlidingItems();
         this.data.splice(j, 1);

@@ -5,18 +5,12 @@ import { AlertController, ToastController } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
 import { Storage } from '@ionic/storage';
 import { TranslocoService } from '@ngneat/transloco';
-interface LocalFile {
-  name: string;
-  path: string;
-  data: string;
-}
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
-
   password: any = '';
   p: any;
   updateGroup = new FormGroup({
@@ -38,7 +32,6 @@ export class ProfilePage implements OnInit {
         'Access-Control-Allow-Origin': '*'
       })
     }
-
   }
   async warningToast() {
     const toast = await this.toastController.create({
@@ -50,8 +43,6 @@ export class ProfilePage implements OnInit {
 
     await toast.present();
   }
-
-
   async successToast() {
     const toast = await this.toastController.create({
       message: this.translocoService.translate('success'),
@@ -62,7 +53,6 @@ export class ProfilePage implements OnInit {
 
     await toast.present();
   }
-
   updateProfile() {
     let data = {
       'id': this.userId,
@@ -104,8 +94,6 @@ export class ProfilePage implements OnInit {
       })
   }
  
- 
-
   ngOnInit() {
     this.storage.get('updatedUser').then((data) => {
       if (data) {

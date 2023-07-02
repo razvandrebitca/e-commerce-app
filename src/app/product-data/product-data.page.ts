@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AlertController, IonSlides, ToastController } from '@ionic/angular';
 import { DataService, Product } from '../services/data.service';
 import { FunctionsService } from '../services/functions.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup} from '@angular/forms';
 import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -168,23 +168,4 @@ export class ProductDataPage implements OnInit {
   toogle(i) {
     this.open[i] = !this.open[i];
   }
-
-  remove() {
-    this.slider.lockSwipes(true);
-  }
-
-  gainback() {
-    this.slider.lockSwipes(false);
-  }
-
-  like() {
-    console.log('like')
-    this.liked = !this.liked;
-  }
-
-
-
-
-
-
 }

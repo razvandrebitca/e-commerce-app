@@ -35,13 +35,11 @@
             </ion-col>
             <ion-col size="6">
               <h3 class="item-name no-margin">{{item.name}}</h3>
-              <!-- <h5 class="item-def no-margin ">shipping: 250 lei</h5> -->
-              <!-- <h5  class="item-def no-margin">Dec 31 - Jan 17</h5> -->
             </ion-col>
             <ion-col size="3">
               <ion-row>
                 <h3  class="item-name no-margin" *ngIf="item.discount>0">
-                  ${{item.totalPrice}}
+                  {{item.totalPrice}} lei
                 </h3>
                 <h3  class="item-name no-margin" *ngIf="item.discount>0"><span class="cut">{{fun.calculate(item.totalPrice,
                   item.discount)}} lei</span></h3>

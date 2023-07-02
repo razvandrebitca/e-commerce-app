@@ -65,7 +65,6 @@ public changeLanguage(languageCode: string): void {
 
     await toast.present();
   }
-
   async successToast() {
     const toast = await this.toastController.create({
       message: this.translocoService.translate('success'),
@@ -76,9 +75,7 @@ public changeLanguage(languageCode: string): void {
 
     await toast.present();
   }
-
   login(): void {
-
     this.authService.login(this.controls.email.value, this.controls.password.value).subscribe({
       next: (res: any) => {
         if (res['token']!='') {
@@ -101,5 +98,3 @@ public changeLanguage(languageCode: string): void {
     return this.form.controls;
   }
 }
-
-

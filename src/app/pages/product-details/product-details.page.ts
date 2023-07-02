@@ -4,8 +4,6 @@ import { TranslocoService } from '@ngneat/transloco';
 import { DataService, HomeTab, Product } from 'src/app/services/data.service';
 import { FunctionsService } from 'src/app/services/functions.service';
 
-
-
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.page.html',

@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
 import { TranslocoService } from '@ngneat/transloco';
-
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
@@ -42,7 +41,6 @@ export class RegisterPage implements OnInit {
       duration: 2000,
       position: "top",
     });
-
     await toast.present();
   }
   async credentialsToast() {
@@ -51,20 +49,16 @@ export class RegisterPage implements OnInit {
       duration: 2000,
       position: "top",
     });
-
     await toast.present();
   }
-
   async successToast() {
     const toast = await this.toastController.create({
       message: this.translocoService.translate('success'),
       duration: 2000,
       position: "top",
     });
-
     await toast.present();
   }
-
   ngOnInit() {
   }
   register() {

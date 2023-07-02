@@ -24,8 +24,6 @@ interface LocalFile {
 export class CreateProductPage implements OnInit {
   product: any = {};
   images: LocalFile[] = [];
-
-
   p: any;
   productGroup = new FormGroup({
     name: new FormControl('', Validators.required),
@@ -69,8 +67,6 @@ export class CreateProductPage implements OnInit {
 
     await toast.present();
   }
-
-
   async successToast() {
     const toast = await this.toastController.create({
       message:this.translocoService.translate('success'),
@@ -81,7 +77,6 @@ export class CreateProductPage implements OnInit {
 
     await toast.present();
   }
-
   calculateFullPrice(price: any, discount: any) {
     if (discount > 0)
       return (100 * price) / (100 - discount);
@@ -160,7 +155,6 @@ export class CreateProductPage implements OnInit {
     })
   }
   deleteProduct(id) {
-
     this.http.delete(environment.API_URL + 'api/products/' + id).subscribe({
       next: () => {
         this.successToast();
@@ -209,7 +203,6 @@ export class CreateProductPage implements OnInit {
             this.image_3 = base64Data;
     }
   }
-
   async saveImage(photo: Photo) {
     const base64Data = await this.readAsBase64(photo);
     const fileName = new Date().getTime() + '.jpeg';
@@ -219,13 +212,11 @@ export class CreateProductPage implements OnInit {
       data: base64Data
     });
   }
-
   private async readAsBase64(photo: Photo) {
     const response = await fetch(photo.webPath);
     const blob = await response.blob();
     return await this.convertBlobToBase64(blob) as string;
   }
-
   convertBlobToBase64 = (blob: Blob) => new Promise((resolve, reject) => {
     const reader = new FileReader;
     reader.onerror = reject;
@@ -234,12 +225,10 @@ export class CreateProductPage implements OnInit {
     };
     reader.readAsDataURL(blob);
   });
-
   async deleteImage(i) {
     this.images.splice(i, 1);
   }
   ngOnInit() {
-
     this.storage.get("userData").then((data) => {
       this.userId = data[0].user.id;
       this.http.get(environment.API_URL + 'api/products/' + this.userId).subscribe((res: any) => {
@@ -249,5 +238,4 @@ export class CreateProductPage implements OnInit {
     });
 
   }
-
 }

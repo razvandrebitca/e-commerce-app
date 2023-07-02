@@ -6,13 +6,10 @@
     <ion-title>
       {{ 'my_products' | transloco }}
     </ion-title>
-
   </ion-toolbar>
 </ion-header>
-
 <ion-content color="light">
   <h1 class="title">{{ 'create_product' | transloco }}</h1>
-
   <div class="profile-info">
     <form [formGroup]="productGroup" (submit)="createProduct()">
       <ion-item>
@@ -40,7 +37,6 @@
           <ion-icon slot="start" name="camera"></ion-icon>
           {{ 'select_images' | transloco }}
         </ion-button>
-
       </ion-item>
       <ion-list>
         <ion-item *ngFor="let file of images; let i = index">
@@ -167,7 +163,6 @@
           <ion-thumbnail *ngIf="image_3" slot="start">
             <ion-img [src]="image_3"></ion-img>
           </ion-thumbnail>
-         
         </ion-item>
       </ion-list>
       <ion-item>
@@ -179,7 +174,5 @@
       <br>
       <ion-button type="submit" expand="full"> {{ 'save' | transloco }}</ion-button>
     </form>
-
   </div>
-
 </ion-content>
