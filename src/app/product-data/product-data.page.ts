@@ -74,7 +74,7 @@ export class ProductDataPage implements OnInit {
   ngOnInit() {
     this.storage.get("userData").then((data) => {
       this.userId = data[0].user.id;
-      this.http.get(environment.API_URL + 'api/reviews/' + this.userId).subscribe((data: any) => {
+      this.http.get(environment.API_URL + 'api/reviews/' + this.productData.id).subscribe((data: any) => {
         this.comments = data;
       })
     });
@@ -88,7 +88,7 @@ export class ProductDataPage implements OnInit {
         this.edit = false;
         this.storage.get("userData").then((data) => {
           this.userId = data[0].user.id;
-          this.http.get(environment.API_URL + 'api/reviews/' + this.userId).subscribe((data: any) => {
+          this.http.get(environment.API_URL + 'api/reviews/' + this.productData.id).subscribe((data: any) => {
             this.comments = data;
           })
         });
@@ -116,7 +116,7 @@ export class ProductDataPage implements OnInit {
           this.http.get(environment.API_URL + 'api/products/' + this.product.id).subscribe((res: any) => {
             this.productData = res.data[0];
           })
-          this.http.get(environment.API_URL + 'api/reviews/' + 1).subscribe((data: any) => {
+          this.http.get(environment.API_URL + 'api/reviews/' +  this.productData.id).subscribe((data: any) => {
             this.comments = data;
           })
         },
@@ -145,7 +145,7 @@ export class ProductDataPage implements OnInit {
         this.http.get(environment.API_URL + 'api/products/' + this.product.id).subscribe((res: any) => {
           this.productData = res.data[0];
         })
-        this.http.get(environment.API_URL + 'api/reviews/' + 1).subscribe((data: any) => {
+        this.http.get(environment.API_URL + 'api/reviews/'+this.productData.id).subscribe((data: any) => {
           this.comments = data;
         })
       },

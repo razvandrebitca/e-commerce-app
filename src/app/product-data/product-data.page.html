@@ -91,7 +91,7 @@
     <br>
     <ion-button expand="full" (click)="sendReview()">{{ 'send' | transloco}}</ion-button>
     <br>
-    <ion-title *ngIf="edit==false">{{ 'comments' | transloco }}</ion-title>
+    <ion-title *ngIf="edit==false && comments?.length > 0">{{ 'comments' | transloco }}</ion-title>
     <ion-title *ngIf="edit==true">{{ 'edit_review' | transloco }}</ion-title>
     <br>
     <div *ngIf="edit==true">
