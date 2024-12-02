@@ -14,7 +14,7 @@
     <ion-row>
       <ion-col>
         <ion-text><span class="label">{{ 'card_number' | transloco }}</span></ion-text>
-        <ion-input [(ngModel)]="creditNumber" class="input"  type="number" placeholder="Credit/Debit Number"></ion-input>
+        <ion-input [(ngModel)]="creditNumber" class="input"  type="number" placeholder="01234..."></ion-input>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -35,25 +35,29 @@
     <ion-row>
       <ion-col>
         <ion-text><span class="label">{{ 'address_line' | transloco }}</span></ion-text>
-        <ion-input class="input" [(ngModel)]="addressLine"   placeholder="Address Line"></ion-input>
+        <ion-input class="input" [(ngModel)]="addressLine"   :placeholder="{{ 'address_line' | transloco }}"></ion-input>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
         <ion-text><span class="label">{{ 'city' | transloco }}</span></ion-text>
-        <ion-input class="input" [(ngModel)]="city"   placeholder="City"></ion-input>
+        <ion-input class="input" [(ngModel)]="city"   :placeholder="{{ 'city' | transloco }}"></ion-input>
       </ion-col>
     </ion-row>
       <ion-row>
         <ion-col>
           <ion-text><span class="label">{{ 'country' | transloco }}</span></ion-text>
-          <ion-input class="input" [(ngModel)]="country"   placeholder="Country"></ion-input>
+          <ion-select [(ngModel)]="country" placeholder="------" >
+            <ion-select-option *ngFor="let c of countries" >
+              {{ c.name }}
+              </ion-select-option>
+            </ion-select>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
           <ion-text><span class="label">{{ 'zip' | transloco }}</span></ion-text>
-          <ion-input class="input" [(ngModel)]="zip" placeholder="Zip code"></ion-input>
+          <ion-input class="input" [(ngModel)]="zip" :placeholder="{{ 'zip' | transloco }}"></ion-input>
         </ion-col>
       </ion-row>
   </div>

@@ -80,6 +80,7 @@ public changeLanguage(languageCode: string): void {
       next: (res: any) => {
         if (res['token']!='') {
           this.storage.set('userData',res);
+          console.log(res)
           this.router.navigate(['/home']);
           this.successToast();
         }
