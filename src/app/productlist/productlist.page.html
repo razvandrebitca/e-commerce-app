@@ -1,4 +1,4 @@
- <ion-row *ngIf="term">
+ <ion-row *ngIf="term && term.length > 3">
   <ion-col *ngFor="let data of recieved_data |filter:term | paginate: { itemsPerPage: 10, currentPage: p };" size="6">
     <ion-card class="card no-margin" (click)="open(data)">
       <ion-badge class="badge" *ngIf="data.discount>0">{{data.discount}}%</ion-badge>

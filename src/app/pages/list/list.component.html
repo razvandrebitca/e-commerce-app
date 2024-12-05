@@ -45,12 +45,6 @@
                   item.discount)}} lei</span></h3>
                 <h3 class="item-name no-margin" *ngIf="item.discount == 0">{{item.totalPrice}} lei</h3>
               </ion-row>
-              <ion-row>
-                <ion-select placeholder="-" interface="popover" [interfaceOptions]="customAlertOptions" [(ngModel)]='item.quantity'
-                  class="select">
-                  <ion-select-option *ngFor="let q of countStock(item.stock) " (value)="q">{{q}}</ion-select-option>
-                </ion-select>
-              </ion-row>
             </ion-col>
           </ion-row>
         </ion-item>
